@@ -14,7 +14,7 @@ class Auth {
         password: password,
       );
       // Account creation successful, navigate to '/dashboard'
-      Navigator.pushNamed(context, '/dashboard');
+      Navigator.pushNamed(context, '/verify_account');
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';
       if (e.code == 'weak-password') {
@@ -42,7 +42,7 @@ class Auth {
         email: email,
         password: password,
       );
-      Navigator.pushNamed(context, '/dashboard');
+      Navigator.pushNamed(context, '/create_saving_account');
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';
       if (e.code == 'user-not-found') {
@@ -60,7 +60,8 @@ class Auth {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     await _firebaseAuth.signOut();
+    Navigator.pushNamed(context, '/login');
   }
 }

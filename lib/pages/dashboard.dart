@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:finhub/firebase_auth/auth.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -19,8 +19,8 @@ class _DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.all(16.0),
             child: Center(
                 child: ElevatedButton(
-                    onPressed: () {
-                        FirebaseAuth.instance.signOut();
+                    onPressed: () async{
+                        await Auth().signOut(context);
                     },
                     child: const Text('Sign Out'),
                   ),

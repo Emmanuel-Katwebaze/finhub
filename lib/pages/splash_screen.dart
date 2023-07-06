@@ -13,14 +13,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      FirebaseAuth.instance.authStateChanges().listen((User? user) {
-        if (user != null) {
-          Navigator.of(context).pushReplacementNamed('/dashboard');
-        } else {
-          Navigator.of(context).pushReplacementNamed('/vision');
-        }
-      });
+    // Timer(const Duration(seconds: 3), () {
+    //   FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    //     if (user != null) {
+    //       Navigator.of(context).pushReplacementNamed('/dashboard');
+    //     } else {
+    //       Navigator.of(context).pushReplacementNamed('/vision');
+    //     }
+    //   });
+    // });
+    Timer(const Duration(seconds: 4), () {
+      Navigator.of(context).pushReplacementNamed('/onboarding');
     });
   }
 
@@ -30,14 +33,15 @@ class _SplashScreenState extends State<SplashScreen> {
     double logicalPixels = 268 / devicePixelRatio;
 
     return Scaffold(
-      backgroundColor: Colors.indigoAccent.shade200.withOpacity(0.75),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'images/ic_launcher.png',
+              'images/finhub_icon.png',
               fit: BoxFit.contain,
+              height: 120,
               // Adjust the height as needed
             ),
             Row(
@@ -46,18 +50,19 @@ class _SplashScreenState extends State<SplashScreen> {
                 Text(
                   'FIN',
                   style: TextStyle(
-                      fontSize: 32,
-                      color: Color(0xFF2B2B46),
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.italic),
+                      fontSize: 35,
+                      color: Color(0xFF050901),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'HUB',
                   style: TextStyle(
-                      fontSize: 32,
-                      color: Color(0xFF2B5BBA),
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.italic),
+                    fontSize: 35,
+                    color: Color(0xFF4246B7),
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -65,9 +70,10 @@ class _SplashScreenState extends State<SplashScreen> {
             const Text(
               'Grow As One',
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 20,
                   color: Colors.white,
-                  fontWeight: FontWeight.w900),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400),
             ),
           ],
         ),
