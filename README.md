@@ -1,5 +1,8 @@
 # finhub
 
+# Running the App;
+- In a terminal in the app directory run; flutter run -t lib/pages/main.dart
+
 A new Flutter project.
 
 ## Getting Started
