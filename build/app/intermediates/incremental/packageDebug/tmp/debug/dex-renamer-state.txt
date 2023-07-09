@@ -1,0 +1,4 @@
+#Thu Jul 06 18:24:25 EAT 2023
+base.0=D\:\\code\\PROJECTS\\finhub\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

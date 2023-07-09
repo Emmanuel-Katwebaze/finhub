@@ -1,20 +1,20 @@
 import 'package:finhub/pages/create_account.dart';
 import 'package:finhub/pages/create_saving_account.dart';
+import 'package:finhub/pages/bank_details.dart';
+import 'package:finhub/pages/congratulations_page.dart';
+import 'package:finhub/pages/enter_phone_no.dart';
 import 'package:finhub/pages/verify_account.dart';
 import 'package:finhub/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:finhub/pages/login_page.dart';
 import 'package:finhub/pages/splash_screen.dart';
-import 'package:finhub/pages/vision_screen.dart';
 import 'package:finhub/pages/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:finhub/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         '/create_account': (context) => CreateAccount(),
         '/verify_account': (context) => const VerifyAccount(),
         '/create_saving_account': (context) => const CreateSavingAccount(),
+        '/enter_phone': (context) => const EnterPhoneNumber(),
+        '/congratulations': (context) => const CongratulationsPage(),
+        '/bank_details': (context) => const CongratulationsPage(),
         '/dashboard': (context) => const Dashboard(),
       },
     );

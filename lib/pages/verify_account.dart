@@ -273,11 +273,11 @@ class _VerifyAccountState extends State<VerifyAccount> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'images/apple.png',
-                width: 100,
-                height: 100,
+                'images/Verification-success.png',
+                width: 200,
+                height: 200,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const Text(
                 'Account Verified Successfully',
                 style: TextStyle(

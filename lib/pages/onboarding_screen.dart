@@ -12,7 +12,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   late PageController _pageController;
   int _currentPage = 0;
-  List<Widget> _fragments = [
+  final List<Widget> _fragments = const [
     OnboardingFragment(text: '1'),
     OnboardingFragment(text: '2'),
     OnboardingFragment(text: '3', lastFragment: true),
