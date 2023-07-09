@@ -1,7 +1,12 @@
 # finhub
 
 # Running the App;
-- In a terminal in the app directory run; flutter run -t lib/pages/main.dart
+- In a terminal in the app directory run; flutter run
+
+# Project Organization
+- Image assets are kept in the images folder in the root directory
+- Animations assets are kept in the animations folder in the root directory
+- Font assets are kept in the fonts folder in the root directory
 
 A new Flutter project.
 
