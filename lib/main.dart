@@ -5,6 +5,7 @@ import 'package:finhub/pages/congratulations_page.dart';
 import 'package:finhub/pages/enter_phone_no.dart';
 import 'package:finhub/pages/bottom_nav.dart';
 import 'package:finhub/pages/payment_method.dart';
+import 'package:finhub/pages/plan_summary.dart';
 import 'package:finhub/pages/verify_account.dart';
 import 'package:finhub/pages/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,9 @@ class MyApp extends StatelessWidget {
         '/payment_method': (context) => const PaymentMethod(),
         '/enter_phone': (context) => const EnterPhoneNumber(),
         '/congratulations': (context) => const CongratulationsPage(),
-        '/bank_details': (context) => const CongratulationsPage(),
+        '/bank_details': (context) => BankDetails(),
         '/bottom_nav': (context) => BottomNavigation(),
+        '/plan_summary': (context) => const PlanSummary(),
         '/dashboard': (context) => const Dashboard(),
       },
     );
