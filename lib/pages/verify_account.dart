@@ -286,6 +286,7 @@ class _VerifyAccountState extends State<VerifyAccount> {
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               Container(

@@ -3,6 +3,8 @@ import 'package:finhub/pages/create_saving_account.dart';
 import 'package:finhub/pages/bank_details.dart';
 import 'package:finhub/pages/congratulations_page.dart';
 import 'package:finhub/pages/enter_phone_no.dart';
+import 'package:finhub/pages/bottom_nav.dart';
+import 'package:finhub/pages/payment_method.dart';
 import 'package:finhub/pages/verify_account.dart';
 import 'package:finhub/pages/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +32,11 @@ class MyApp extends StatelessWidget {
         '/create_account': (context) => CreateAccount(),
         '/verify_account': (context) => const VerifyAccount(),
         '/create_saving_account': (context) => const CreateSavingAccount(),
+        '/payment_method': (context) => const PaymentMethod(),
         '/enter_phone': (context) => const EnterPhoneNumber(),
         '/congratulations': (context) => const CongratulationsPage(),
         '/bank_details': (context) => const CongratulationsPage(),
+        '/bottom_nav': (context) => BottomNavigation(),
         '/dashboard': (context) => const Dashboard(),
       },
     );

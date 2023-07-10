@@ -202,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                Container(
+                SizedBox(
                   width: 349,
                   height: 54,
                   child: ElevatedButton(

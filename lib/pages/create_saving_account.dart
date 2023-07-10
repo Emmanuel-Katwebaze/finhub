@@ -81,6 +81,8 @@ class _CreateSavingAccountState extends State<CreateSavingAccount> {
                       });
                       // Simulating verification process
                       Future.delayed(const Duration(seconds: 2), () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/payment_method');
                         setState(() {
                           //
                         });

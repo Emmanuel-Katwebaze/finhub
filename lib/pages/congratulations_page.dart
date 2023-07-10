@@ -79,6 +79,8 @@ class _CongratulationsPageState extends State<CongratulationsPage> {
                       });
                       // Simulating verification process
                       Future.delayed(const Duration(seconds: 2), () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/bottom_nav');
                         setState(() {
                           //
                         });

@@ -90,7 +90,6 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                 ),
                 Container(
                   child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
                     controller: phoneNumberController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
