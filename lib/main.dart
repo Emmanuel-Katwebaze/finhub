@@ -2,7 +2,14 @@ import 'package:finhub/pages/create_account.dart';
 import 'package:finhub/pages/create_saving_account.dart';
 import 'package:finhub/pages/bank_details.dart';
 import 'package:finhub/pages/congratulations_page.dart';
+import 'package:finhub/pages/loan_received.dart';
+import 'package:finhub/pages/loan_summary.dart';
+import 'package:finhub/pages/loan_breakdown.dart';
+import 'package:finhub/pages/loan_repayment.dart';
+import 'package:finhub/pages/loan_repayment_main.dart';
+import 'package:finhub/pages/make_early_repayment.dart';
 import 'package:finhub/pages/enter_phone_no.dart';
+import 'package:finhub/pages/successful_screen.dart';
 import 'package:finhub/pages/bottom_nav.dart';
 import 'package:finhub/pages/payment_method.dart';
 import 'package:finhub/pages/plan_summary.dart';
@@ -25,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashScreen(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/onboarding': (context) => const OnBoardingScreen(),
@@ -39,6 +46,13 @@ class MyApp extends StatelessWidget {
         '/bank_details': (context) => BankDetails(),
         '/bottom_nav': (context) => BottomNavigation(),
         '/plan_summary': (context) => const PlanSummary(),
+        '/successful_screen': (context) => const SuccessfulScreen(),
+        '/loan_summary': (context) => LoanSummary(),
+        '/loan_breakdown': (context) => LoanBreakdown(),
+        '/loan_received': (context) => LoanReceived(),
+        '/loan_repayment': (context) => LoanRepayment(),
+        '/loan_repayment_main': (context) => LoanRepaymentMain(),
+        '/make_early_repayment': (context) => MakeEarlyRepayment(),
         '/dashboard': (context) => const Dashboard(),
       },
     );
