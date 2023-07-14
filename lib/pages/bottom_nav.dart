@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:finhub/pages/home_screen_page.dart';
 import 'package:finhub/pages/savings_screen_page.dart';
+import 'package:finhub/pages/loans_screen.dart';
 
 
 class BottomNavigation extends StatefulWidget {
@@ -14,7 +15,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreenPage(),
     SavingsScreenPage(),
-    LoansScreenPage(),
+    LoansScreen(),
     ChatsScreenPage(),
     AccountScreenPage(),
   ];
@@ -60,15 +61,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-}
-
-class LoansScreenPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Loans Page'),
-    );
   }
 }
 

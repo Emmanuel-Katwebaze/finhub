@@ -27,9 +27,10 @@ class _ArticlesState extends State<Articles> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'images/Verification-success.png',
+                  'images/card1.jpg',
                   height: 100,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
+                  width: 230,
                 ),
                 const SizedBox(
                   height: 5,
@@ -91,7 +92,7 @@ class _ArticlesState extends State<Articles> {
                 Row(
                   children: const [
                     CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar@3x.png'),
+                            backgroundImage: AssetImage('images/card2.jpg'),
                             radius: 20.0,
                           ),
                     SizedBox(width: 8.0),
@@ -121,9 +122,10 @@ class _ArticlesState extends State<Articles> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'images/Verification-success.png',
+                  'images/card1.jpg',
                   height: 100,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
+                  width: 230,
                 ),
                 const SizedBox(
                   height: 5,
@@ -185,7 +187,7 @@ class _ArticlesState extends State<Articles> {
                 Row(
                   children: const [
                     CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar@3x.png'),
+                            backgroundImage: AssetImage('images/card2.jpg'),
                             radius: 20.0,
                           ),
                     SizedBox(width: 8.0),
@@ -215,9 +217,10 @@ class _ArticlesState extends State<Articles> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'images/Verification-success.png',
+                  'images/card1.jpg',
                   height: 100,
-                  fit: BoxFit.fill,
+                  width: 230,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   height: 5,
@@ -279,7 +282,7 @@ class _ArticlesState extends State<Articles> {
                 Row(
                   children: const [
                     CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar@3x.png'),
+                            backgroundImage: AssetImage('images/card2.jpg'),
                             radius: 20.0,
                           ),
                     SizedBox(width: 8.0),

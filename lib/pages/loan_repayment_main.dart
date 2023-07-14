@@ -372,15 +372,18 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Loan repayment reminder',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Loan repayment reminder',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               const Text(

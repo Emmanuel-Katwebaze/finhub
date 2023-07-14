@@ -4,6 +4,9 @@ import 'package:finhub/pages/bank_details.dart';
 import 'package:finhub/pages/congratulations_page.dart';
 import 'package:finhub/pages/loan_received.dart';
 import 'package:finhub/pages/loan_summary.dart';
+import 'package:finhub/pages/loan_calculator.dart';
+import 'package:finhub/pages/loan_packages.dart';
+import 'package:finhub/pages/loans_screen.dart';
 import 'package:finhub/pages/loan_breakdown.dart';
 import 'package:finhub/pages/loan_repayment.dart';
 import 'package:finhub/pages/loan_repayment_main.dart';
@@ -48,8 +51,11 @@ class MyApp extends StatelessWidget {
         '/plan_summary': (context) => const PlanSummary(),
         '/successful_screen': (context) => const SuccessfulScreen(),
         '/loan_summary': (context) => LoanSummary(),
+        '/loan_calculator': (context) => LoanCalculator(),
+        '/loan_packages': (context) => LoanPackages(),
         '/loan_breakdown': (context) => LoanBreakdown(),
         '/loan_received': (context) => LoanReceived(),
+        '/loans_screen': (context) => LoansScreen(),
         '/loan_repayment': (context) => LoanRepayment(),
         '/loan_repayment_main': (context) => LoanRepaymentMain(),
         '/make_early_repayment': (context) => MakeEarlyRepayment(),
