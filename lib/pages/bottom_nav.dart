@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:finhub/pages/home_screen_page.dart';
 import 'package:finhub/pages/savings_screen_page.dart';
 import 'package:finhub/pages/loans_screen.dart';
-
+import 'package:finhub/pages/account_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     SavingsScreenPage(),
     LoansScreen(),
     ChatsScreenPage(),
-    AccountScreenPage(),
+    AccountScreen(),
   ];
 
   static const List<String> _menuTitles = <String>[
@@ -28,13 +28,29 @@ class _BottomNavigationState extends State<BottomNavigation> {
     'Account',
   ];
 
-  static const List<IconData> _menuIcons = <IconData>[
-    Icons.home,
-    Icons.savings,
-    Icons.money,
-    Icons.chat,
-    Icons.account_box_rounded,
+  static const List<String> _menuIcons = <String>[
+    'images/home_icon.png',
+    'images/savings_icon.png',
+    'images/loans_icon.png',
+    'images/chats_icon.png',
+    'images/account_icon.png',
   ];
+
+  static const List<String> _activeMenuIcons = <String>[
+    'images/home.png', // Active icon for 'Home' menu item
+    'images/savings_icon.png',
+    'images/loans_icon.png',
+    'images/chats_icon.png',
+    'images/account_icon.png',
+  ];
+
+  // Define the TextStyle for the menu labels
+  static const TextStyle _menuLabelStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    fontFamily:
+        'Questrial', 
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +60,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
         items: <BottomNavigationBarItem>[
           for (var i = 0; i < _menuTitles.length; i++)
             BottomNavigationBarItem(
-              icon: Icon(_menuIcons[i]),
+              icon: Image.asset(
+                _selectedIndex == i ? _activeMenuIcons[i] : _menuIcons[i],
+                height: 24,
+                width: 24,
+                color: _selectedIndex == i
+                    ? const Color(0xFF2B5BBA)
+                    : Colors.black,
+              ),
               label: _menuTitles[i],
             ),
         ],
@@ -52,6 +75,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
         selectedItemColor: const Color(0xFF2B5BBA),
         unselectedItemColor: Colors.black,
         showUnselectedLabels: true,
+        unselectedLabelStyle:
+            _menuLabelStyle, // Apply the TextStyle to unselected labels
+        selectedLabelStyle:
+            _menuLabelStyle, // Apply the TextStyle to selected labels
         onTap: _onItemTapped,
       ),
     );

@@ -23,7 +23,7 @@ class LoansScreenCard extends StatelessWidget {
       },
       child: Container(
         width: 170,
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: color,
@@ -42,11 +42,11 @@ class LoansScreenCard extends StatelessWidget {
                 height: 37,
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                   fontFamily: 'Questrial',
@@ -82,7 +82,7 @@ class DottedBackgroundPainter extends CustomPainter {
       backgroundPaint,
     );
 
-    canvas.drawCircle(const Offset(10, 10), dotRadius, dotPaint);
+    canvas.drawCircle(const Offset(20, 20), dotRadius, dotPaint);
   }
 
   @override

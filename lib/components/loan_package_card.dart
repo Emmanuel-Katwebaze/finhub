@@ -5,6 +5,7 @@ class LoanPackageCard extends StatelessWidget {
   final String title;
   final String interestRate;
   final String amount;
+  final Color backgroundColor; // New parameter for background color
 
   const LoanPackageCard({
     Key? key,
@@ -12,6 +13,7 @@ class LoanPackageCard extends StatelessWidget {
     required this.title,
     required this.interestRate,
     required this.amount,
+    required this.backgroundColor, // Initialize the new parameter
   }) : super(key: key);
 
   @override
@@ -42,10 +44,21 @@ class LoanPackageCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    imagePath,
+                  Container(
+                    width: 37,
                     height: 37,
-                    fit: BoxFit.fill,
+                    decoration: BoxDecoration(
+                      color: backgroundColor
+                          .withOpacity(0.2), // Use the new parameter
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Image.asset(
+                      imagePath,
+                      height: 17,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
                   ),
                   Text(
                     title,

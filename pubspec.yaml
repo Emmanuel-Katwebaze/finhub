@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
   lottie: ^2.3.0
+  dotted_border: ^2.0.0+3
+  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:

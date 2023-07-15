@@ -221,14 +221,14 @@ class _LoansScreenState extends State<LoansScreen> {
                     LoansScreenCard(
                       color: Color(0xFF02AF71),
                       dotColor: Color(0xFF02C17D),
-                      imageUrl: "images/iconsaxbulkemptywallettime@3x.png",
+                      imageUrl: "images/emptywallettick.png",
                       text: "Apply for Loan",
                       route: "/loan_packages",
                     ),
                     LoansScreenCard(
                       color: Color(0xFFFBB0B0),
                       dotColor: Color(0xFFF7ACAC),
-                      imageUrl: "images/iconsaxbulkemptywallettime@3x.png",
+                      imageUrl: "images/walletmoney.png",
                       text: "Loan Payment",
                       route: "/loan_repayment_main",
                     ),
@@ -243,14 +243,14 @@ class _LoansScreenState extends State<LoansScreen> {
                     LoansScreenCard(
                       color: Color(0xFF2B5BBA),
                       dotColor: Color(0xFF1C4CAA),
-                      imageUrl: "images/iconsaxbulkemptywallettime@3x.png",
+                      imageUrl: "images/moneyrecive.png",
                       text: "Early Repayment",
                       route: "/make_early_repayment",
                     ),
                     LoansScreenCard(
                       color: Color(0xFF030C1E),
                       dotColor: Color(0xFF051636),
-                      imageUrl: "images/iconsaxbulkemptywallettime@3x.png",
+                      imageUrl: "images/pictureframe.png",
                       text: "Loan Breakdown",
                       route: "/loan_breakdown",
                     ),
