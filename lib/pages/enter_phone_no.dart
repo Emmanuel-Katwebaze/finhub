@@ -88,34 +88,33 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                 const SizedBox(
                   height: 15,
                 ),
-                Container(
-                  child: TextFormField(
-                    controller: phoneNumberController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your phone number';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: "e.g 0770000000",
-                      hintStyle: const TextStyle(
-                        fontSize: 20,
-                        color: Color(0xFF828282),
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFCDCDCD)),
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding: EdgeInsets.all(20),
+                TextFormField(
+                  cursorColor: const Color(0xFF4246B7),
+                  controller: phoneNumberController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your phone number';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "e.g 0770000000",
+                    hintStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF828282),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
                     ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    contentPadding: EdgeInsets.all(20),
                   ),
                 ),
               ],
@@ -134,8 +133,9 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                   // Simulating verification process
                   Future.delayed(const Duration(seconds: 2), () {
                     setState(() {
-                      //
+                      _isLoading = false;
                     });
+                    Navigator.pushNamed(context, "/congratulations");
                   });
                 },
                 style: ElevatedButton.styleFrom(

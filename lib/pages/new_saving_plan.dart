@@ -142,7 +142,7 @@ class NewSavingPlanState extends State<NewSavingPlan> {
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.pushNamed(context, '/page2');
+                      Navigator.pushNamed(context, "/savings_frequency");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2B5BBA),

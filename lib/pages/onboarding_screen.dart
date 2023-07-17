@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:finhub/pages/login_page.dart';
+import 'package:finhub/pages/sign_in.dart';
 import 'package:lottie/lottie.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void _navigateToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
+      MaterialPageRoute(builder: (context) => SignIn()),
     );
   }
 

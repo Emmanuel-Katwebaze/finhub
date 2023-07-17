@@ -217,15 +217,31 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         content: Text('Please select an option'),
                       ),
                     );
-                  } else {
-                    // Proceed with the selected option
-                  }
-                  // Simulating verification process
-                  Future.delayed(const Duration(seconds: 2), () {
                     setState(() {
-                      //
+                      _isLoading = false;
                     });
-                  });
+                  } else if (selectedOption == "bank") {
+                    Future.delayed(
+                      const Duration(seconds: 2),
+                      () {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                        Navigator.pushNamed(context, "/bank_details");
+                      },
+                    );
+                  } else if (selectedOption == 'mtn' ||
+                      selectedOption == 'airtel') {
+                    Future.delayed(
+                      const Duration(seconds: 2),
+                      () {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                        Navigator.pushNamed(context, "/enter_phone");
+                      },
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2B5BBA),

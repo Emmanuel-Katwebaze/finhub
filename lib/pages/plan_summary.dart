@@ -86,24 +86,24 @@ class _PlanSummaryState extends State<PlanSummary> {
               ),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
-                  PlanSummaryRow(
+                  const PlanSummaryRow(
                       keyText: "Periodic Amount", valueText: "UGX 20,000"),
-                  SizedBox(height: 20),
-                  PlanSummaryRow(keyText: "Frequency", valueText: "Monthly"),
-                  SizedBox(height: 20),
-                  PlanSummaryRow(
+                  const SizedBox(height: 20),
+                  const PlanSummaryRow(keyText: "Frequency", valueText: "Monthly"),
+                  const SizedBox(height: 20),
+                  const PlanSummaryRow(
                       keyText: "Start Date", valueText: "12/06/2023"),
-                  SizedBox(height: 20),
-                  PlanSummaryRow(
+                  const SizedBox(height: 20),
+                  const PlanSummaryRow(
                       keyText: "Withdraw Date", valueText: "12/06/2026"),
-                  SizedBox(height: 20),
-                  PlanSummaryRow(
+                  const SizedBox(height: 20),
+                  const PlanSummaryRow(
                       keyText: "Interest Rate", valueText: "3% per annum"),
-                  SizedBox(height: 20),
-                  PlanSummaryRow(keyText: "Lock Status", valueText: "Locked"),
+                  const SizedBox(height: 20),
+                  const PlanSummaryRow(keyText: "Lock Status", valueText: "Locked"),
                   const SizedBox(
                     height: 150,
                   ),

@@ -86,13 +86,14 @@ class _VerifyAccountState extends State<VerifyAccount> {
                   height: 20,
                 ),
                 Form(
-                  child: Container(
+                  child: SizedBox(
                     child: Row(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 70,
                           child: TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
@@ -112,10 +113,11 @@ class _VerifyAccountState extends State<VerifyAccount> {
                         const SizedBox(
                           width: 15,
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 70,
                           child: TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
@@ -135,10 +137,11 @@ class _VerifyAccountState extends State<VerifyAccount> {
                         const SizedBox(
                           width: 15,
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 70,
                           child: TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
@@ -158,10 +161,11 @@ class _VerifyAccountState extends State<VerifyAccount> {
                         const SizedBox(
                           width: 15,
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 70,
                           child: TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
@@ -289,7 +293,7 @@ class _VerifyAccountState extends State<VerifyAccount> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 349,
                 height: 54,
                 child: ElevatedButton(

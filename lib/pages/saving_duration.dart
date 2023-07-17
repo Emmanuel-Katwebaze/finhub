@@ -240,6 +240,34 @@ class SavingDurationState extends State<SavingDuration> {
               ],
             ),
           ),
+          const SizedBox(height: 250),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/plan_summary");
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2B5BBA),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12),
+                child: Text(
+                  'Continue',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Questrial',
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

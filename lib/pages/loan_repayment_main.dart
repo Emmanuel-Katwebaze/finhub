@@ -11,7 +11,7 @@ class LoanRepaymentMain extends StatefulWidget {
 
 class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
   String? selectedOption;
-  bool? recurring;
+  bool recurring = false;
   final dateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -19,7 +19,6 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
   void initState() {
     super.initState();
     selectedOption = "paid"; // Set the default value to true (Paid)
-    recurring = true;
   }
 
   @override
@@ -413,6 +412,7 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
               Form(
                 key: _formKey,
                 child: TextFormField(
+                  cursorColor: const Color(0xFF4246B7),
                   keyboardType: TextInputType.datetime,
                   controller: dateController,
                   validator: (value) {
@@ -434,7 +434,7 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: "DD/MM/YYYY",
+                    hintText: "DD-MM-YYYY",
                     hintStyle: const TextStyle(
                       fontSize: 20,
                       color: Color(0xFF828282),
@@ -452,7 +452,7 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
                     fillColor: Colors.white,
                     contentPadding: EdgeInsets.all(20),
                     suffixIcon: const Icon(
-                      Icons.calendar_today,
+                      Icons.calendar_month,
                       color: Color(0xFF9C9D9E),
                     ),
                   ),
@@ -466,9 +466,9 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
                     value: recurring,
                     onChanged: (value) {
                       setState(() {
-                        recurring = value;
+                        recurring = value!;
                       });
-                    },                    
+                    },
                     checkColor: Colors.white,
                     focusColor: const Color(0xFF2B5BBA),
                     activeColor: const Color(0xFF2B5BBA),
@@ -548,11 +548,13 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
   }
 
   handleSubmit() {
-    if (_formKey.currentState!.validate()) {
-      final date = dateController.value.text;
-      Navigator.pop(context);
-      _showReminderSuccessDialog(context);
-    }
+    // if (_formKey.currentState!.validate()) {
+    //   final date = dateController.value.text;
+    //   Navigator.pop(context);
+    //   _showReminderSuccessDialog(context);
+    // }
+    Navigator.pop(context);
+    _showReminderSuccessDialog(context);
   }
 
   void _showReminderSuccessDialog(BuildContext context) {

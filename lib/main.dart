@@ -1,4 +1,4 @@
-import 'package:finhub/pages/create_account.dart';
+import 'package:finhub/pages/sign_up.dart';
 import 'package:finhub/pages/create_saving_account.dart';
 import 'package:finhub/pages/new_saving_plan.dart';
 import 'package:finhub/pages/bank_details.dart';
@@ -27,7 +27,7 @@ import 'package:finhub/pages/profile_info.dart';
 import 'package:finhub/pages/verify_account.dart';
 import 'package:finhub/pages/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:finhub/pages/login_page.dart';
+import 'package:finhub/pages/sign_in.dart';
 import 'package:finhub/pages/splash_screen.dart';
 import 'package:finhub/pages/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,8 +47,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/onboarding': (context) => const OnBoardingScreen(),
-        '/login': (context) => LoginPage(),
-        '/create_account': (context) => CreateAccount(),
+        '/sign_in': (context) => SignIn(),
+        '/sign_up': (context) => SignUp(),
         '/verify_account': (context) => const VerifyAccount(),
         '/create_saving_account': (context) => const CreateSavingAccount(),
         '/payment_method': (context) => const PaymentMethod(),

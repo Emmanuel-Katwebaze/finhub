@@ -231,7 +231,7 @@ class SavingsFrequencyState extends State<SavingsFrequency> {
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.pushNamed(context, '/page2');
+                       Navigator.pushNamed(context, "/lock_status");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2B5BBA),

@@ -93,213 +93,201 @@ class _BankDetailsState extends State<BankDetails> {
                   ),
                   Form(
                     key: _formKey,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Bank Name",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF433D3D),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
+                    child: Column(
+                      children: [
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Bank Name",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF433D3D),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          cursorColor: const Color(0xFF4246B7),
+                          controller: banknameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your bank name';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "e.g Centenary Bank",
+                            hintStyle: const TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF828282),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            // Adjust the horizontal margin as desired
-                            child: TextFormField(
-                              controller: banknameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your bank name';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                hintText: "e.g Centenary Bank",
-                                hintStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF828282),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color(0xFFD9D9D9)),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFCDCDCD)),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                contentPadding: const EdgeInsets.all(20),
-                              ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ),
-                          const SizedBox(height: 25),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Account Number",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF433D3D),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFCDCDCD)),
                             ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(20),
                           ),
-                          const SizedBox(
-                            height: 15,
+                        ),
+                        const SizedBox(height: 25),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Account Number",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF433D3D),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400),
                           ),
-                          Container(
-                            child: TextFormField(
-                              controller: emailController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter account number';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                hintText: "e.g 18923983292",
-                                hintStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF828282),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color(0xFFD9D9D9)),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFCDCDCD)),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                contentPadding: const EdgeInsets.all(20),
-                              ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          cursorColor: const Color(0xFF4246B7),
+                          controller: emailController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter account number';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "e.g 18923983292",
+                            hintStyle: const TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF828282),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Account name",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF433D3D),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            // Adjust the horizontal margin as desired
-                            child: TextFormField(
-                              controller: accountNameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your account name';
-                                }
-                                return null;
-                              },
-                              obscureText: _obscureText,
-                              decoration: InputDecoration(
-                                hintText: "e.g Josephine",
-                                hintStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF828282),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color(0xFFD9D9D9)),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFCDCDCD)),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                contentPadding: const EdgeInsets.all(20),
-                              ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFCDCDCD)),
                             ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(20),
                           ),
-                          const SizedBox(
-                            height: 25,
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Account name",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF433D3D),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400),
                           ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Amount to save",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF433D3D),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          cursorColor: const Color(0xFF4246B7),
+                          controller: accountNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your account name';
+                            }
+                            return null;
+                          },
+                          obscureText: _obscureText,
+                          decoration: InputDecoration(
+                            hintText: "e.g Josephine",
+                            hintStyle: const TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF828282),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              controller: amountToSaveController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your amount to save';
-                                }
-                                return null;
-                              },
-                              obscureText: _obscureText2,
-                              decoration: InputDecoration(
-                                hintText: "eg 40000",
-                                hintStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF828282),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color(0xFFD9D9D9)),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFFCDCDCD)),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                contentPadding: const EdgeInsets.all(20),
-                              ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.circular(20),
                             ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(20),
                           ),
-                          const SizedBox(
-                            height: 25,
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Amount to save",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF433D3D),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400),
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          cursorColor: const Color(0xFF4246B7),
+                          keyboardType: TextInputType.number,
+                          controller: amountToSaveController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your amount to save';
+                            }
+                            return null;
+                          },
+                          obscureText: _obscureText2,
+                          decoration: InputDecoration(
+                            hintText: "eg 40000",
+                            hintStyle: const TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF828282),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(20),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 349,
                     height: 54,
                     child: ElevatedButton(
@@ -309,9 +297,7 @@ class _BankDetailsState extends State<BankDetails> {
                         });
                         // Simulating verification process
                         Future.delayed(const Duration(seconds: 2), () {
-                          setState(() {
-                            //
-                          });
+                          Navigator.pushNamed(context, "/congratulations");
                         });
                       },
                       style: ElevatedButton.styleFrom(
