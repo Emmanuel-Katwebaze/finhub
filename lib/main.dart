@@ -1,10 +1,15 @@
 import 'package:finhub/pages/create_account.dart';
 import 'package:finhub/pages/create_saving_account.dart';
+import 'package:finhub/pages/new_saving_plan.dart';
 import 'package:finhub/pages/bank_details.dart';
 import 'package:finhub/pages/congratulations_page.dart';
 import 'package:finhub/pages/loan_received.dart';
+import 'package:finhub/pages/savings_screen.dart';
+import 'package:finhub/pages/saving_duration.dart';
+import 'package:finhub/pages/savings_frequency.dart';
 import 'package:finhub/pages/loan_summary.dart';
 import 'package:finhub/pages/loan_calculator.dart';
+import 'package:finhub/pages/lock_status.dart';
 import 'package:finhub/pages/loan_packages.dart';
 import 'package:finhub/pages/loans_screen.dart';
 import 'package:finhub/pages/loan_breakdown.dart';
@@ -66,6 +71,11 @@ class MyApp extends StatelessWidget {
         '/loan_repayment_main': (context) => LoanRepaymentMain(),
         '/make_early_repayment': (context) => MakeEarlyRepayment(),
         '/dashboard': (context) => const Dashboard(),
+        '/savings_frequency': (context) => const SavingsFrequency(),
+        '/new_saving_plan': (context) => const NewSavingPlan(),
+        '/savings_screen': (context) => const SavingScreen(),
+        '/saving_duration': (context) => const SavingDuration(),
+        '/lock_status': (context) => const LockStatus(),
       },
     );
   }
