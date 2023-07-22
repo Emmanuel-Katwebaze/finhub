@@ -18,6 +18,7 @@ import 'package:finhub/pages/loan_repayment.dart';
 import 'package:finhub/pages/account_screen.dart';
 import 'package:finhub/pages/loan_repayment_main.dart';
 import 'package:finhub/pages/make_early_repayment.dart';
+import 'package:finhub/pages/mojaloop.dart';
 import 'package:finhub/pages/enter_phone_no.dart';
 import 'package:finhub/pages/successful_screen.dart';
 import 'package:finhub/pages/bottom_nav.dart';
@@ -32,6 +33,15 @@ import 'package:finhub/pages/splash_screen.dart';
 import 'package:finhub/pages/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:finhub/firebase_options.dart';
+import 'package:finhub/pages/about_us.dart';
+import 'package:finhub/pages/chats_profile.dart';
+import 'package:finhub/pages/chats_screen.dart';
+import 'package:finhub/pages/contact_us.dart';
+import 'package:finhub/pages/contacts.dart';
+import 'package:finhub/pages/password_reset.dart';
+import 'package:finhub/pages/messages_screen.dart';
+//
+import 'package:finhub/pages/enter_phone_no2.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +86,16 @@ class MyApp extends StatelessWidget {
         '/savings_screen': (context) => const SavingScreen(),
         '/saving_duration': (context) => const SavingDuration(),
         '/lock_status': (context) => const LockStatus(),
+        '/send_money_screen': (context) => SendMoneyScreen(),
+        '/about_us': (context) => const AboutUs(),
+        '/chats_profile': (context) => const ChatsProfile(),
+        '/chats_screen': (context) => const ChatsScreen(),
+        '/contact_us': (context) => const ContactUs(),
+        '/password_reset': (context) => const PasswordReset(),
+        '/contacts': (context) => const Contacts(),
+        '/messages_screen': (context) => MessagesScreen(),
+        ////////
+        '/enter_phone_no2': (context) => EnterPhoneNumber2(),
       },
     );
   }

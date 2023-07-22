@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:finhub/pages/home_screen_page.dart';
-import 'package:finhub/pages/savings_screen_page.dart';
+import 'package:finhub/pages/savings_details.dart';
 import 'package:finhub/pages/loans_screen.dart';
 import 'package:finhub/pages/account_screen.dart';
+import 'package:finhub/pages/chats_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -12,12 +13,12 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeScreenPage(),
-    SavingsScreenPage(),
-    LoansScreen(),
-    ChatsScreenPage(),
-    AccountScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreenPage(),
+    const SavingsDetails(),
+    const LoansScreen(),
+    const ChatsScreen(),
+    const AccountScreen(),
   ];
 
   static const List<String> _menuTitles = <String>[

@@ -10,7 +10,6 @@ class EnterPhoneNumber extends StatefulWidget {
 class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
   bool _isLoading = false;
   final phoneNumberController = TextEditingController();
-  final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override

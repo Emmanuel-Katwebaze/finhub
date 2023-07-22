@@ -431,7 +431,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: 349,
                       height: 54,
                       child: ElevatedButton(

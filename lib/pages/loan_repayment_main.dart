@@ -566,49 +566,53 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
             borderRadius: BorderRadius.circular(30),
           ),
           backgroundColor: Colors.white,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'images/Verification-success.png',
-                width: 200,
-                height: 200,
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Reminder Set Successfully',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Color(0xFF2B5BBA),
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w700,
+          content: SizedBox(
+            height: 423,
+            width: 356,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'images/Verification-success.png',
+                  width: 200,
+                  height: 200,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Container(
-                width: 349,
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2B5BBA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Color(0xFF4246B7),
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Reminder Set Successfully',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Color(0xFF2B5BBA),
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
                   ),
-                  child: const Text('Close'),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 349,
+                  height: 54,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2B5BBA),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFF4246B7),
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    child: const Text('Close'),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

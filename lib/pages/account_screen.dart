@@ -21,6 +21,9 @@ class _AccountScreenState extends State<AccountScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -55,7 +58,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         contentPadding: EdgeInsets.symmetric(horizontal: 0),
                         tileColor: Colors.white,
                         leading: const CircleAvatar(
-                          backgroundImage: AssetImage('images/Rectangle 38.png'),
+                          backgroundImage:
+                              AssetImage('images/Rectangle 38.png'),
                           radius: 25.0,
                         ),
                         title: const Text(
@@ -124,7 +128,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           imagePath: "images/dropbox.png",
                           containerColor: const Color(0xFF9801DF),
                           text: "About",
-                          navigationRoute: "/about"),
+                          navigationRoute: "/about_us"),
                       const SizedBox(
                         height: 30,
                       ),

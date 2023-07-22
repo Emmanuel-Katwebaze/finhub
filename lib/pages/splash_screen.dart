@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
               'Grow As One',
               style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: Color(0xFF9B9AAC),
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400),
             ),
