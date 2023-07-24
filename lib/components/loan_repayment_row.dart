@@ -10,30 +10,60 @@ class LoanRepaymentRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildCircleWithStick(type),
-        Text(
-          dateText,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Color(0xFF433D3D),
-            fontFamily: 'Questrial',
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Text(
-          amountText,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-            fontFamily: 'Questrial',
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
-    );
+    return type == 'not_paid'
+        ? GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "/loan_repayment");
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildCircleWithStick(type),
+                Text(
+                  dateText,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFF433D3D),
+                    fontFamily: 'Questrial',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Text(
+                  amountText,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontFamily: 'Questrial',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildCircleWithStick(type),
+              Text(
+                dateText,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFF433D3D),
+                  fontFamily: 'Questrial',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                amountText,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontFamily: 'Questrial',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          );
   }
 }
 

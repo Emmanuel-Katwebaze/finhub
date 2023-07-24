@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:finhub/pages/bottom_nav.dart';
 
 class SavingScreen extends StatefulWidget {
   const SavingScreen({Key? key}) : super(key: key);
@@ -15,11 +16,11 @@ class _SavingScreenState extends State<SavingScreen> {
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 const SizedBox(
-                  height: 70,
+                  height: 30,
                 ),
                 Center(
                   child: Image.asset(
@@ -76,212 +77,105 @@ class _SavingScreenState extends State<SavingScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                Center(
-                  child: Wrap(
-                    spacing: 10.0,
-                    runSpacing: 10.0,
-                    children: [
-                      SizedBox(
-                        width: 170.0,
-                        height: 98.0,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/new_saving_plan');
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 170.0,
+                      height: 98.0,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const BottomNavigation(selectedIndex: 1),
                             ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                border: Border.all(
-                                  color: Color(0xFF2B5BBA),
-                                  width: 3.0,
-                                ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              border: Border.all(
+                                color: Color(0xFF2B5BBA),
+                                width: 3.0,
                               ),
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    top: 5.0,
-                                    left: 5.0,
-                                    child: Container(
-                                      width: 15.0,
-                                      height: 15.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: const Color(0xFF2B5BBA),
-                                          width: 3.0,
-                                        ),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 5.0,
+                                  left: 5.0,
+                                  child: Container(
+                                    width: 15.0,
+                                    height: 15.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: const Color(0xFF2B5BBA),
+                                        width: 3.0,
                                       ),
                                     ),
                                   ),
-                                  Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "images/iconsaxbulkdollarsquare@3x.png",
-                                          height: 40,
+                                ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "images/iconsaxbulkdollarsquare@3x.png",
+                                        height: 40,
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      const Text(
+                                        "Save",
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          color: Color(0xFF433D3D),
+                                          fontFamily: 'Questrial',
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                        const SizedBox(width: 5.0),
-                                        const Text(
-                                          "Save",
-                                          style: TextStyle(
-                                            fontSize: 25,
-                                            color: Color(0xFF433D3D),
-                                            fontFamily: 'Questrial',
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 170.0,
-                        height: 98.0,
-                        child: InkWell(
-                          onTap: () {
-                            // Navigator.pushNamed(context, '/');
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "images/iconsaxbulkbox1@3x.png",
-                                    height: 40,
-                                  ),
-                                  const SizedBox(width: 5.0),
-                                  const Text(
-                                    "Invest",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Color(0xFF433D3D),
-                                      fontFamily: 'Questrial',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                    ),
+                    SizedBox(
+                      width: 170.0,
+                      height: 98.0,
+                      child: InkWell(
+                        onTap: () {
+                          // Navigator.pushNamed(context, '/');
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 170.0,
-                        height: 98.0,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/loans_screen');
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "images/iconsaxbulkbriefcase@3x.png",
-                                    height: 40,
-                                  ),
-                                  const SizedBox(width: 5.0),
-                                  const Text(
-                                    "Loan",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Color(0xFF433D3D),
-                                      fontFamily: 'Questrial',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 170.0,
-                        height: 98.0,
-                        child: InkWell(
-                          onTap: () {
-                            // Navigator.pushNamed(context, '/');
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "images/iconsaxbulkprofile2user@3x.png",
-                                    height: 40,
-                                  ),
-                                  const SizedBox(width: 5.0),
-                                  const Text(
-                                    "Connect",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Color(0xFF433D3D),
-                                      fontFamily: 'Questrial',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 355.0,
-                        height: 98.0,
-                        child: InkWell(
-                          onTap: () {
-                            // Navigator.pushNamed(context, '/');
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
+                          child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "images/iconsaxbulkemptywallettime@3x.png",
-                                  width: 30.0,
+                                  "images/iconsaxbulkbox1@3x.png",
+                                  height: 40,
                                 ),
                                 const SizedBox(width: 5.0),
                                 const Text(
-                                  "Financial Knowledge",
+                                  "Invest",
                                   style: TextStyle(
                                     fontSize: 25,
                                     color: Color(0xFF433D3D),
@@ -294,7 +188,133 @@ class _SavingScreenState extends State<SavingScreen> {
                           ),
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 170.0,
+                      height: 98.0,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const BottomNavigation(selectedIndex: 2),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "images/iconsaxbulkbriefcase@3x.png",
+                                  height: 40,
+                                ),
+                                const SizedBox(width: 5.0),
+                                const Text(
+                                  "Loan",
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Color(0xFF433D3D),
+                                    fontFamily: 'Questrial',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 170.0,
+                      height: 98.0,
+                      child: InkWell(
+                        onTap: () {
+                          // Navigator.pushNamed(context, '/');
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "images/iconsaxbulkprofile2user@3x.png",
+                                  height: 40,
+                                ),
+                                const SizedBox(width: 5.0),
+                                const Text(
+                                  "Connect",
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Color(0xFF433D3D),
+                                    fontFamily: 'Questrial',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 355.0,
+                  height: 98.0,
+                  child: InkWell(
+                    onTap: () {
+                      // Navigator.pushNamed(context, '/');
+                    },
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "images/iconsaxbulkemptywallettime@3x.png",
+                            width: 30.0,
+                          ),
+                          const SizedBox(width: 5.0),
+                          const Text(
+                            "Financial Knowledge",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Color(0xFF433D3D),
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 50),

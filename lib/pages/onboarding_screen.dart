@@ -99,7 +99,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               children: _fragments,
             ),
             if (_currentPage != 0) Positioned(
-              top: 20,
+              top: 30,
               left: 20,
               child: Row(
                 children: [
@@ -120,7 +120,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
             Positioned(
-              bottom: 20,
+              bottom: 30,
               left: 20,
               child: Row(
                 children: [
@@ -203,7 +203,7 @@ class OnboardingFragment extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 30),

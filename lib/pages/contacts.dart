@@ -167,7 +167,9 @@ class Contacts extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: const EdgeInsets.all(20.0),
+          contentPadding: const EdgeInsets.all(20),
+          titlePadding: const EdgeInsets.all(20),
+          insetPadding: const EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

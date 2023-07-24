@@ -18,7 +18,7 @@ class _LoanRepaymentState extends State<LoanRepayment> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [

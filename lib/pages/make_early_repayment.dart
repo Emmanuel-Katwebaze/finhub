@@ -39,7 +39,7 @@ class _MakeEarlyRepaymentState extends State<MakeEarlyRepayment> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [
@@ -101,6 +101,7 @@ class _MakeEarlyRepaymentState extends State<MakeEarlyRepayment> {
                         ),
                         Container(
                           child: TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
                             keyboardType: TextInputType.number,
                             controller: amountToPayController,
                             validator: (value) {
@@ -230,7 +231,7 @@ class _MakeEarlyRepaymentState extends State<MakeEarlyRepayment> {
               // Simulating verification process
               Future.delayed(const Duration(seconds: 2), () {
                 Navigator.of(context)
-                    .pushReplacementNamed('/loan_repayment');
+                    .pushReplacementNamed('/payment_method');
                 setState(() {
                   //
                 });

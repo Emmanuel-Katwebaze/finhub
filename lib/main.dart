@@ -20,11 +20,13 @@ import 'package:finhub/pages/loan_repayment_main.dart';
 import 'package:finhub/pages/make_early_repayment.dart';
 import 'package:finhub/pages/mojaloop.dart';
 import 'package:finhub/pages/enter_phone_no.dart';
+import 'package:finhub/pages/choose_plan.dart';
 import 'package:finhub/pages/successful_screen.dart';
 import 'package:finhub/pages/bottom_nav.dart';
 import 'package:finhub/pages/payment_method.dart';
 import 'package:finhub/pages/plan_summary.dart';
 import 'package:finhub/pages/profile_info.dart';
+import 'package:finhub/pages/previous_savings.dart';
 import 'package:finhub/pages/verify_account.dart';
 import 'package:finhub/pages/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +96,8 @@ class MyApp extends StatelessWidget {
         '/password_reset': (context) => const PasswordReset(),
         '/contacts': (context) => const Contacts(),
         '/messages_screen': (context) => MessagesScreen(),
+        '/choose_plan': (context) => ChoosePlan(),
+        '/previous_savings': (context) => PreviousSavings(),
         ////////
         '/enter_phone_no2': (context) => EnterPhoneNumber2(),
       },

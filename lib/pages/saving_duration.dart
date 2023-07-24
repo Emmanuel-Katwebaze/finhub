@@ -39,6 +39,7 @@ class SavingDurationState extends State<SavingDuration> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
+            backgroundColor: const Color(0xFF2B5BBA),
             primaryColor:
                 const Color(0xFF2B5BBA), // Set your desired color here
             accentColor: const Color(0xFF2B5BBA), // Set your desired color here
@@ -79,194 +80,198 @@ class SavingDurationState extends State<SavingDuration> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
-      body: Column(
+      body: ListView(
         children: [
-          AspectRatio(
-            aspectRatio: 3 / 2,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              color: const Color(0xFF2B5BBA),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16, bottom: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Text(
-                            'SAVING DURATION',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                            ),
+          Column(
+            children: [
+              AspectRatio(
+                aspectRatio: 3 / 2,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  color: const Color(0xFF2B5BBA),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16, bottom: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Text(
+                                'SAVING DURATION',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "When would you like to start and stop saving?",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Questrial',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            "When would you like to start and stop saving?",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Questrial',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 30,
-                    left: 20,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white,
                         ),
                       ),
-                      child: IconButton(
-                        icon: const Icon(Icons.chevron_left),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                      Positioned(
+                        top: 30,
+                        left: 20,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(Icons.chevron_left),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Start date',
+                      style: TextStyle(
+                        color: Color(0xFF433D3D),
+                        fontFamily: 'Questrial',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _startDateController,
+                      onTap: () => _selectStartDate(context),
+                      readOnly: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Select start date",
+                        hintStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF828282),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.all(20),
+                        suffixIcon: const Icon(
+                          Icons.calendar_month,
+                          color: Color(0xFF9C9D9E),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    const Text(
+                      'Withdraw date',
+                      style: TextStyle(
+                        color: Color(0xFF433D3D),
+                        fontFamily: 'Questrial',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _withdrawDateController,
+                      onTap: () => _selectWithdrawDate(context),
+                      readOnly: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Select withdraw date",
+                        hintStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF828282),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.all(20),
+                        suffixIcon: const Icon(
+                          Icons.calendar_month,
+                          color: Color(0xFF9C9D9E),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 250),
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/plan_summary");
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2B5BBA),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Questrial',
+                        fontWeight: FontWeight.w400,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Start date',
-                  style: TextStyle(
-                    color: Color(0xFF433D3D),
-                    fontFamily: 'Questrial',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _startDateController,
-                  onTap: () => _selectStartDate(context),
-                  readOnly: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return '';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Select start date",
-                    hintStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Color(0xFF828282),
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFCDCDCD)),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.all(20),
-                    suffixIcon: const Icon(
-                      Icons.calendar_month,
-                      color: Color(0xFF9C9D9E),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 25),
-                const Text(
-                  'Withdraw date',
-                  style: TextStyle(
-                    color: Color(0xFF433D3D),
-                    fontFamily: 'Questrial',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _withdrawDateController,
-                  onTap: () => _selectWithdrawDate(context),
-                  readOnly: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return '';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Select withdraw date",
-                    hintStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Color(0xFF828282),
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFCDCDCD)),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.all(20),
-                    suffixIcon: const Icon(
-                      Icons.calendar_month,
-                      color: Color(0xFF9C9D9E),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 250),
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/plan_summary");
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2B5BBA),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(12),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Questrial',
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            ],
           ),
         ],
       ),

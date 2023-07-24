@@ -20,7 +20,7 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [

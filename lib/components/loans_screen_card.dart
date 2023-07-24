@@ -22,7 +22,7 @@ class LoansScreenCard extends StatelessWidget {
         Navigator.pushNamed(context, route);
       },
       child: Container(
-        width: 170,
+        width: 160,
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

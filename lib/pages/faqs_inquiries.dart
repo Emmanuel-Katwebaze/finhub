@@ -59,7 +59,7 @@ class _FaqsInquiriesState extends State<FaqsInquiries> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(right: 30, left: 30, top: 20),
+                margin: const EdgeInsets.all(10),
                 child: Column(
                   children: [
                     const SizedBox(

@@ -17,7 +17,7 @@ class _LoanBreakdownState extends State<LoanBreakdown> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [
@@ -52,14 +52,14 @@ class _LoanBreakdownState extends State<LoanBreakdown> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 const SizedBox(
                   height: 80,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -141,7 +141,7 @@ class _LoanBreakdownState extends State<LoanBreakdown> {
                   height: 15,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),

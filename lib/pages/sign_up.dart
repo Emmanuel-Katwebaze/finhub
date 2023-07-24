@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.center,
           children: [
             Positioned(
-              top: 20,
+              top: 30,
               left: 20,
               child: Row(
                 children: [
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(right: 30, left: 30, top: 20),
+              margin: const EdgeInsets.only(right: 30, left: 30, top: 40),
               child: Column(
                 children: [
                   const Text(

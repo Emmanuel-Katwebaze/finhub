@@ -18,7 +18,7 @@ class _CreateSavingAccountState extends State<CreateSavingAccount> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [
@@ -46,7 +46,7 @@ class _CreateSavingAccountState extends State<CreateSavingAccount> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 60,
+                  height: 70,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,

@@ -27,10 +27,13 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
       backgroundColor: const Color(0xFFFFFFFF),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   Container(
@@ -368,6 +371,9 @@ class _LoanRepaymentMainState extends State<LoanRepaymentMain> {
             borderRadius: BorderRadius.circular(30),
           ),
           backgroundColor: Colors.white,
+          contentPadding: const EdgeInsets.all(20),
+          titlePadding: const EdgeInsets.all(20),
+          insetPadding: const EdgeInsets.all(20),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

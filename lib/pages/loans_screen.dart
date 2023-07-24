@@ -193,7 +193,7 @@ class _LoansScreenState extends State<LoansScreen> {
             height: 130,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -216,7 +216,7 @@ class _LoansScreenState extends State<LoansScreen> {
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: const [
                     LoansScreenCard(
                       color: Color(0xFF02AF71),
@@ -238,7 +238,7 @@ class _LoansScreenState extends State<LoansScreen> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: const [
                     LoansScreenCard(
                       color: Color(0xFF2B5BBA),
@@ -293,45 +293,50 @@ class _LoansScreenState extends State<LoansScreen> {
                       ),
                     ],
                   ),
-                  child: ListTile(
-                    tileColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    leading: const Icon(
-                      Icons.account_balance_wallet,
-                      color: Color(0xFF9C9D9E),
-                    ),
-                    title: Row(
-                      children: const [
-                        Text(
-                          'Loan Approval',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          'View Details',
-                          style: TextStyle(
-                            color: Color(0xFF2B5BBA),
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    subtitle: const Text(
-                      "The loan you applied for is waiting for approval",
-                      style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      //
+                    },
+                    child: ListTile(
+                      tileColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      leading: const Icon(
+                        Icons.account_balance_wallet,
                         color: Color(0xFF9C9D9E),
-                        fontSize: 15,
-                        fontFamily: 'Questrial',
-                        fontWeight: FontWeight.w400,
+                      ),
+                      title: Row(
+                        children: const [
+                          Text(
+                            'Loan Approval',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'View Details',
+                            style: TextStyle(
+                              color: Color(0xFF2B5BBA),
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: const Text(
+                        "The loan you applied for is waiting for approval",
+                        style: TextStyle(
+                          color: Color(0xFF9C9D9E),
+                          fontSize: 15,
+                          fontFamily: 'Questrial',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
@@ -355,45 +360,51 @@ class _LoansScreenState extends State<LoansScreen> {
                       ),
                     ],
                   ),
-                  child: ListTile(
-                    tileColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    leading: const Icon(
-                      Icons.account_balance_wallet,
-                      color: Color(0xFF9C9D9E),
-                    ),
-                    title: Row(
-                      children: const [
-                        Text(
-                          'Loan Received',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          'View Details',
-                          style: TextStyle(
-                            color: Color(0xFF2B5BBA),
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    subtitle: const Text(
-                      "You received a loan of UGX 400,000",
-                      style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/loan_received');
+                    },
+                    child: ListTile(
+                      tileColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      leading: const Icon(
+                        Icons.account_balance_wallet,
                         color: Color(0xFF9C9D9E),
-                        fontSize: 15,
-                        fontFamily: 'Questrial',
-                        fontWeight: FontWeight.w400,
+                      ),
+                      title: Row(
+                        children: const [
+                          Text(
+                            'Loan Received',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'View Details',
+                            style: TextStyle(
+                              color: Color(0xFF2B5BBA),
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: const Text(
+                        "You received a loan of UGX 400,000",
+                        style: TextStyle(
+                          color: Color(0xFF9C9D9E),
+                          fontSize: 15,
+                          fontFamily: 'Questrial',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),

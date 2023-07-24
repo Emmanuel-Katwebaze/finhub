@@ -8,6 +8,9 @@ import 'package:finhub/pages/chats_screen.dart';
 class BottomNavigation extends StatefulWidget {
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
+  final int? selectedIndex; 
+
+  const BottomNavigation({Key? key, this.selectedIndex}) : super(key: key);
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
@@ -49,12 +52,20 @@ class _BottomNavigationState extends State<BottomNavigation> {
   static const TextStyle _menuLabelStyle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    fontFamily:
-        'Questrial', 
+    fontFamily: 'Questrial',
   );
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.selectedIndex != null) {
+      _selectedIndex = widget.selectedIndex!;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -89,23 +100,5 @@ class _BottomNavigationState extends State<BottomNavigation> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-}
-
-class ChatsScreenPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Chats Page'),
-    );
-  }
-}
-
-class AccountScreenPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Account Page'),
-    );
   }
 }

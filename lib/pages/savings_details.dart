@@ -17,7 +17,7 @@ class _SavingsDetailsState extends State<SavingsDetails> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 const SizedBox(
@@ -44,7 +44,8 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                       height: 35,
                       child: ElevatedButton(
                         onPressed: () {
-                          //
+                          Navigator.of(context)
+                                .pushReplacementNamed('/choose_plan');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2B5BBA),
@@ -77,7 +78,7 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                   height: 10,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -169,58 +170,67 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Text(
-                          "Previous Savings",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: const Color(0xFF2B5BBA).withOpacity(0.57),
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed('/previous_savings');
+                          },
+                          child: Text(
+                            "Previous Savings",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: const Color(0xFF2B5BBA).withOpacity(0.57),
+                              fontFamily: 'Questrial',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
-                        width: 317,
-                        height: 35,
-                        child: Material(
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(10),
-                          child: OutlinedButton(
-                            onPressed: () {
-                              //
-                            },
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                      Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: 317,
+                          height: 35,
+                          child: Material(
+                            elevation: 4,
+                            borderRadius: BorderRadius.circular(10),
+                            child: OutlinedButton(
+                              onPressed: () {
+                                //
+                              },
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                side: const BorderSide(
+                                  color: Color(0xFF2B5BBA),
+                                ),
                               ),
-                              side: const BorderSide(
-                                color: Color(0xFF2B5BBA),
-                              ),
-                            ),
-                            child: Row(
-                              children: const [
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Request Withdraw',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF2B5BBA),
+                              child: Row(
+                                children: const [
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Request Withdraw',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF2B5BBA),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.chevron_right,
-                                  color: Color(0xFF2B5BBA),
-                                ),
-                              ],
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Color(0xFF2B5BBA),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -273,8 +283,8 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
                                   child: Text(value),
                                 ),
                               );
@@ -456,7 +466,7 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                         ],
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 30,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -489,7 +499,8 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                             height: 35,
                             child: OutlinedButton(
                               onPressed: () {
-                                //
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/new_saving_plan');
                               },
                               style: OutlinedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -511,7 +522,10 @@ class _SavingsDetailsState extends State<SavingsDetails> {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 )

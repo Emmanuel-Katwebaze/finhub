@@ -17,7 +17,7 @@ class _LoanPackagesState extends State<LoanPackages> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: Row(
               children: [
@@ -40,7 +40,7 @@ class _LoanPackagesState extends State<LoanPackages> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 30, left: 30, top: 20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               children: const [
                 SizedBox(

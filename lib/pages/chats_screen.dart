@@ -54,7 +54,6 @@ class ChatsScreenState extends State<ChatsScreen> {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          const SizedBox(height: 16.0),
                           Row(
                             children: [
                               const SizedBox(width: 10.0),

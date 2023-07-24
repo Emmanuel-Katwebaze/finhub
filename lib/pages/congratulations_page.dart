@@ -17,30 +17,6 @@ class _CongratulationsPageState extends State<CongratulationsPage> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            top: 20,
-            left: 20,
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: const Color(0xFF2B5BBA).withOpacity(0.29),
-                    ),
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.chevron_left),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    color: Colors.black,
-                  ),
-                ),
-                // const SizedBox(width: 70,),
-              ],
-            ),
-          ),
           Container(
             margin: const EdgeInsets.only(right: 30, left: 30, top: 20),
             child: Column(

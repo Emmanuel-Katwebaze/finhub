@@ -65,31 +65,28 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         child: Image.asset('images/face.png'),
                       ),
                       const SizedBox(width: 5),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Josephine',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xffFFFFFF),
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Poppins',
-                              ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Josephine',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xffFFFFFF),
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Poppins',
                             ),
-                            SizedBox(height: 5),
-                            Text(
-                              'online',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Color(0xffE0E0E0),
-                                fontFamily: 'Poppins',
-                              ),
+                          ),
+                          Text(
+                            'online',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color(0xffE0E0E0),
+                              fontFamily: 'Poppins',
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       const Spacer(), // Use Spacer to push the actions to the right side
                       Padding(

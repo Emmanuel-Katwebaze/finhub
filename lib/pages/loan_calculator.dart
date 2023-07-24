@@ -61,7 +61,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(right: 30, left: 30, top: 20),
+                  margin: const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       const SizedBox(
@@ -301,7 +301,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
           Expanded(
             child: Container(
               color: Colors.white,
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 children: [
                   Container(
@@ -379,12 +379,11 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                         setState(() {
                           _isLoading = true;
                         });
-                        // Simulating verification process
                         Future.delayed(const Duration(seconds: 2), () {
-                          // Navigator.of(context)
-                          //     .pushReplacementNamed('/successful_screen');
+                          Navigator.of(context)
+                              .pushReplacementNamed('/loan_summary');
                           setState(() {
-                            //
+                            _isLoading = false;
                           });
                         });
                       },
