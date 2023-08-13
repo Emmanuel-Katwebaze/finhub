@@ -117,6 +117,14 @@ class _AccountScreenState extends State<AccountScreen> {
                         height: 30,
                       ),
                       AccountRow(
+                          imagePath: "images/book.png",
+                          containerColor: const Color(0xFFC0C0C0),
+                          text: "Verification Details",
+                          navigationRoute: "/verification_details"),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      AccountRow(
                           imagePath: "images/call-1.png",
                           containerColor: const Color(0xFFF0BC01),
                           text: "Contact Us",

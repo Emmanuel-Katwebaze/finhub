@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class EnterPhoneNumber extends StatefulWidget {
-  const EnterPhoneNumber({super.key});
+class EnterAmount extends StatefulWidget {
+  const EnterAmount({super.key});
 
   @override
-  State<EnterPhoneNumber> createState() => _EnterPhoneNumberState();
+  State<EnterAmount> createState() => _EnterAmountState();
 }
 
-class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
+class _EnterAmountState extends State<EnterAmount> {
   bool _isLoading = false;
-  final phoneNumberController = TextEditingController();
+  final amountController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -55,7 +55,7 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Enter Phone number',
+                        'Enter Amount',
                         style: TextStyle(
                           fontSize: 30,
                           color: Color(0xFF050901),
@@ -65,7 +65,7 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                       ),
                     ),
                     const Text(
-                      "Please enter your mobile account number",
+                      "Please enter the withdraw amount",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
@@ -78,7 +78,7 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "Phone Number",
+                        "Amount",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color(0xFF433D3D),
@@ -90,16 +90,17 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                       height: 15,
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       cursorColor: const Color(0xFF4246B7),
-                      controller: phoneNumberController,
+                      controller: amountController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
+                          return 'Please enter the amount';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "e.g 0770000000",
+                        hintText: "e.g 5000",
                         hintStyle: const TextStyle(
                           fontSize: 20,
                           color: Color(0xFF828282),

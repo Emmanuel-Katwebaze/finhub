@@ -70,32 +70,44 @@ class _VerifyAccountState extends State<VerifyAccount> {
                       height: 100,
                       // Adjust the height as needed
                     ),
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Verify Your Account',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Color(0xFF050901),
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Verify Your Account',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color(0xFF050901),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                    const Text(
-                      "We've sent a verification code to example@gmail.com. Check your email and enter the code below",
-                      style: TextStyle(
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "We've sent a verification code to example@gmail.com. Check your email and enter the code below",
+                        style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
+                    const SizedBox(
+                      height: 50,
+                    ),
                     Form(
                       child: SizedBox(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
                               height: 50,

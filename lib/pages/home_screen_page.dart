@@ -267,6 +267,9 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
+                                _buildMenuItem("Welcome", () {
+                                  Navigator.of(context).pushNamed('/savings_screen');
+                                }),
                                 _buildMenuItem("Sign Out", () {
                                   Navigator.of(context).pushNamed('/sign_in');
                                 }),

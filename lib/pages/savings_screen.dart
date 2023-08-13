@@ -245,7 +245,7 @@ class _SavingScreenState extends State<SavingScreen> {
                       height: 98.0,
                       child: InkWell(
                         onTap: () {
-                          // Navigator.pushNamed(context, '/');
+                          Navigator.pushNamed(context, '/withdraw');
                         },
                         child: Card(
                           color: Colors.white,
@@ -258,12 +258,12 @@ class _SavingScreenState extends State<SavingScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "images/iconsaxbulkprofile2user@3x.png",
-                                  height: 40,
+                                  "images/withdrawal.png",
+                                  height: 30,
                                 ),
                                 const SizedBox(width: 5.0),
                                 const Text(
-                                  "Connect",
+                                  "Withdraw",
                                   style: TextStyle(
                                     fontSize: 25,
                                     color: Color(0xFF433D3D),

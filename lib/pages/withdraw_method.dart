@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class PaymentMethod extends StatefulWidget {
-  const PaymentMethod({super.key});
+class WithdrawMethod extends StatefulWidget {
+  const WithdrawMethod({super.key});
 
   @override
-  State<PaymentMethod> createState() => _PaymentMethodState();
+  State<WithdrawMethod> createState() => _WithdrawMethodState();
 }
 
-class _PaymentMethodState extends State<PaymentMethod> {
+class _WithdrawMethodState extends State<WithdrawMethod> {
   bool _isLoading = false;
   String? selectedOption;
-  final bankController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  QRViewController? _qrController;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     color: Colors.black,
                   ),
                 ),
-                // const SizedBox(width: 70,),
               ],
             ),
           ),
@@ -55,7 +59,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Payment Method',
+                    'Withdraw Method',
                     style: TextStyle(
                       fontSize: 30,
                       color: Color(0xFF050901),
@@ -67,7 +71,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Chose the payment method",
+                    "Choose the withdrawal method",
                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xFF433D3D),
@@ -80,7 +84,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 ),
                 ListTile(
                   title: const Text(
-                    "Bank",
+                    "QR Code",
                     style: TextStyle(
                         fontSize: 25,
                         color: Color(0xFF433D3D),
@@ -90,7 +94,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   leading: Transform.scale(
                     scale: 1.25,
                     child: Radio(
-                      value: 'bank',
+                      value: 'qr_code',
                       focusColor: const Color(0xFF2B5BBA),
                       activeColor: const Color(0xFF2B5BBA),
                       groupValue: selectedOption,
@@ -129,100 +133,21 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     ),
                   ),
                 ),
-                // const Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Text(
-                //     "Mobile Money",
-                //     style: TextStyle(
-                //       fontSize: 25,
-                //       color: Color(0xFF433D3D),
-                //       fontFamily: 'Poppins',
-                //       fontWeight: FontWeight.w400,
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                // Column(
-                //   children: [
-                //     ListTile(
-                //       title: Row(
-                //         children: [
-                //           Image.asset(
-                //             'images/MTN-logo.png',
-                //             fit: BoxFit.contain,
-                //             // Adjust the height as needed
-                //           ),
-                //           const SizedBox(
-                //             width: 20,
-                //           ),
-                //           const Text(
-                //             "MTN",
-                //             style: TextStyle(
-                //                 fontSize: 25,
-                //                 color: Color(0xFF433D3D),
-                //                 fontFamily: 'Poppins',
-                //                 fontWeight: FontWeight.w400),
-                //           ),
-                //         ],
-                //       ),
-                //       leading: Transform.scale(
-                //         scale: 1.25,
-                //         child: Radio(
-                //           value: 'mtn',
-                //           focusColor: const Color(0xFF2B5BBA),
-                //           activeColor: const Color(0xFF2B5BBA),
-                //           groupValue: selectedOption,
-                //           onChanged: (value) {
-                //             setState(() {
-                //               selectedOption = value;
-                //             });
-                //           },
-                //         ),
-                //       ),
-                //     ),
-                //     ListTile(
-                //       title: Row(
-                //         children: [
-                //           Image.asset(
-                //             'images/Airtel-logo.png',
-                //             fit: BoxFit.contain,
-                //             // Adjust the height as needed
-                //           ),
-                //           const SizedBox(
-                //             width: 20,
-                //           ),
-                //           const Text(
-                //             "Airtel",
-                //             style: TextStyle(
-                //                 fontSize: 25,
-                //                 color: Color(0xFF433D3D),
-                //                 fontFamily: 'Poppins',
-                //                 fontWeight: FontWeight.w400),
-                //           ),
-                //         ],
-                //       ),
-                //       leading: Transform.scale(
-                //         scale: 1.25,
-                //         child: Radio(
-                //           value: 'airtel',
-                //           focusColor: const Color(0xFF2B5BBA),
-                //           activeColor: const Color(0xFF2B5BBA),
-                //           groupValue: selectedOption,
-                //           onChanged: (value) {
-                //             setState(
-                //               () {
-                //                 selectedOption = value;
-                //               },
-                //             );
-                //           },
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
+            ),
+          ),
+          Visibility(
+            visible: selectedOption == 'qr_code',
+            child: Positioned(
+              top: 200,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.width * 0.8,
+                child: QRView(
+                  key: qrKey,
+                  onQRViewCreated: _onQRViewCreated,
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -244,25 +169,14 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     setState(() {
                       _isLoading = false;
                     });
-                  } else if (selectedOption == "bank") {
+                  } else if (selectedOption == 'mobile_money') {
                     Future.delayed(
                       const Duration(seconds: 2),
                       () {
                         setState(() {
                           _isLoading = false;
                         });
-                        Navigator.pushNamed(context, "/bank_details");
-                      },
-                    );
-                  } else if (selectedOption == 'mtn' ||
-                      selectedOption == 'airtel' || selectedOption == 'mobile_money') {
-                    Future.delayed(
-                      const Duration(seconds: 2),
-                      () {
-                        setState(() {
-                          _isLoading = false;
-                        });
-                        Navigator.pushNamed(context, "/enter_phone");
+                        Navigator.pushNamed(context, '/enter_amount');
                       },
                     );
                   }
@@ -292,4 +206,41 @@ class _PaymentMethodState extends State<PaymentMethod> {
       ),
     );
   }
+
+  void _onQRViewCreated(QRViewController controller) {
+    setState(() {
+      _qrController = controller;
+    });
+
+    controller.scannedDataStream.listen((scanData) {
+      _qrController?.pauseCamera();
+      _processScannedQRCode(scanData.code!);
+    });
+  }
+
+  void _processScannedQRCode(String qrCode) {
+    // Handle the scanned QR code here
+    if (qrCode == "desired_qr_code") {
+      Navigator.pushNamed(context, '/bank_details');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid QR code.'),
+        ),
+      );
+      _qrController?.resumeCamera();
+    }
+  }
+
+  @override
+  void dispose() {
+    _qrController?.dispose();
+    super.dispose();
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: WithdrawMethod(),
+  ));
 }

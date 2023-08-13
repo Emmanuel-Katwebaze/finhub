@@ -32,30 +32,6 @@ class _SignInState extends State<SignIn> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Positioned(
-              top: 30,
-              left: 20,
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color(0xFF2B5BBA).withOpacity(0.29),
-                      ),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.chevron_left),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      color: Colors.black,
-                    ),
-                  ),
-                  // const SizedBox(width: 70,),
-                ],
-              ),
-            ),
             Container(
               margin: const EdgeInsets.only(right: 30, left: 30, top: 40),
               child: Column(
