@@ -26,7 +26,7 @@ import 'package:finhub/pages/successful_screen.dart';
 import 'package:finhub/pages/bottom_nav.dart';
 import 'package:finhub/pages/payment_method.dart';
 import 'package:finhub/pages/verification_details.dart';
-import 'package:finhub/pages/withdraw_method.dart';
+import 'package:finhub/pages/withdraw_method_main.dart';
 import 'package:finhub/pages/plan_summary.dart';
 import 'package:finhub/pages/profile_info.dart';
 import 'package:finhub/pages/previous_savings.dart';
@@ -47,7 +47,8 @@ import 'package:finhub/pages/password_reset.dart';
 import 'package:finhub/pages/messages_screen.dart';
 //
 import 'package:finhub/pages/enter_phone_no2.dart';
-import 'package:finhub/pages/enter_amount.dart';
+import 'package:finhub/pages/mobile_money_topup.dart';
+import 'package:finhub/pages/make_payment.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,8 +107,9 @@ class MyApp extends StatelessWidget {
         '/enter_phone_no2': (context) => EnterPhoneNumber2(),
         '/mojaloop': (context) => SendMoneyScreen(),
         '/withdraw': (context) => WithdrawMethod(),
-        '/enter_amount': (context) => EnterAmount(),
+        '/mobile_money_topup': (context) => MobileMoneyTopup(),
         '/verification_details': (context) => VerificationDetails(),
+        '/make_payment': (context) => MakePayment(),
         // '/complete_profile': (context) => CompleteProfile(),
       },
     );

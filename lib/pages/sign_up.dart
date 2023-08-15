@@ -12,12 +12,21 @@ class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final studentNumberController = TextEditingController();
   final confirmpasswordController = TextEditingController();
   final universityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
   bool _obscureText2 = true;
   bool _isLoading = false;
+
+  String selectedValue = 'Makerere University';
+  List<String> universities = [
+    'Makerere University',
+    'Kyambogo University',
+    'Uganda Christian University',
+    'ISBAT',
+  ];
 
   handleSubmit(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -119,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              hintText: "Enter full name",
+                              hintText: "Full name",
                               hintStyle: const TextStyle(
                                 fontSize: 20,
                                 color: Color(0xFF828282),
@@ -152,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              hintText: "Enter email address",
+                              hintText: "Email address",
                               hintStyle: const TextStyle(
                                 fontSize: 20,
                                 color: Color(0xFF828282),
@@ -171,6 +180,119 @@ class _SignUpState extends State<SignUp> {
                               fillColor: Colors.white,
                               filled: true,
                               contentPadding: const EdgeInsets.all(20),
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                          TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your phone number';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: "Phone number",
+                              hintStyle: const TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF828282),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFD9D9D9)),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFCDCDCD)),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: const EdgeInsets.all(20),
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                          TextFormField(
+                            cursorColor: const Color(0xFF4246B7),
+                            controller: studentNumberController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your student number';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: "Student number",
+                              hintStyle: const TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF828282),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFD9D9D9)),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFCDCDCD)),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: const EdgeInsets.all(20),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            padding: const EdgeInsets.all(5),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: selectedValue,
+                                isExpanded: true,
+                                icon: const Icon(Icons.arrow_drop_down,
+                                    color: Color(0xFFEBEBEB), size: 40),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xFF433D3D),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedValue = newValue!;
+                                  });
+                                },
+                                items: universities
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Color(0xFF828282),
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                           const SizedBox(

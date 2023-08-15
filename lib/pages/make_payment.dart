@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
-class EnterAmount extends StatefulWidget {
-  const EnterAmount({super.key});
+class MakePayment extends StatefulWidget {
+  const MakePayment({super.key});
 
   @override
-  State<EnterAmount> createState() => _EnterAmountState();
+  State<MakePayment> createState() => _MakePaymentState();
 }
 
-class _EnterAmountState extends State<EnterAmount> {
+class _MakePaymentState extends State<MakePayment> {
   bool _isLoading = false;
   final amountController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String selectedValue = 'Plan name 1';
+  List<String> plan = [
+    'Plan name 1',
+    'Plan name 2',
+    'Plan name 3',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +62,7 @@ class _EnterAmountState extends State<EnterAmount> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Enter Amount',
+                        'Make Payment',
                         style: TextStyle(
                           fontSize: 30,
                           color: Color(0xFF050901),
@@ -65,7 +72,7 @@ class _EnterAmountState extends State<EnterAmount> {
                       ),
                     ),
                     const Text(
-                      "Please enter the withdraw amount",
+                      "Please enter the number, amount and select a plan",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
@@ -74,6 +81,53 @@ class _EnterAmountState extends State<EnterAmount> {
                     ),
                     const SizedBox(
                       height: 30,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Phone Number",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFF433D3D),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      cursorColor: const Color(0xFF4246B7),
+                      controller: phoneNumberController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "0770000000",
+                        hintStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF828282),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.all(20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
                     ),
                     const Align(
                       alignment: Alignment.centerLeft,
@@ -100,7 +154,7 @@ class _EnterAmountState extends State<EnterAmount> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "e.g 5000",
+                        hintText: "5000",
                         hintStyle: const TextStyle(
                           fontSize: 20,
                           color: Color(0xFF828282),
@@ -108,7 +162,8 @@ class _EnterAmountState extends State<EnterAmount> {
                           fontWeight: FontWeight.w400,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFD9D9D9)),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         focusedBorder: const OutlineInputBorder(
@@ -117,6 +172,67 @@ class _EnterAmountState extends State<EnterAmount> {
                         fillColor: Colors.white,
                         filled: true,
                         contentPadding: EdgeInsets.all(20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Choose Plan",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFF433D3D),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xFFD9D9D9)),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(5),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedValue,
+                          isExpanded: true,
+                          icon: const Icon(Icons.arrow_drop_down,
+                              color: Color(0xFF828282)),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF828282),
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedValue = newValue!;
+                            });
+                          },
+                          items: plan
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  value,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFF828282),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                     const SizedBox(
