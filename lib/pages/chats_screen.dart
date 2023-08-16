@@ -58,7 +58,7 @@ class ChatsScreenState extends State<ChatsScreen> {
                             children: [
                               const SizedBox(width: 10.0),
                               Image.asset(
-                                'images/face.png',
+                                'images/avatar@3x.png',
                                 width: 64,
                                 height: 64,
                               ),

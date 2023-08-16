@@ -83,7 +83,7 @@ class Contacts extends StatelessWidget {
                           child: Row(
                             children: [
                               Image.asset(
-                                'images/face.png',
+                                'images/avatar@3x.png',
                                 width: 45,
                                 height: 45,
                               ),

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:finhub/pages/student_provider.dart';
+import 'package:finhub/firebase_auth/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class EnterPhoneNumber extends StatefulWidget {
   const EnterPhoneNumber({super.key});
@@ -11,6 +16,45 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
   bool _isLoading = false;
   final phoneNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  void paySubscription() async {
+    setState(() {
+      _isLoading = true;
+    });
+    
+    final String userId =
+        Provider.of<StudentProvider>(context, listen: false).studentId;
+    final amount = 5000;
+    final currentTime = FieldValue.serverTimestamp();
+
+    // Update student's status and add payment record
+    final studentRef =
+        FirebaseFirestore.instance.collection('students').doc(userId);
+
+    try {
+      await studentRef.update({
+        'status': 'subscribed',
+      });
+
+      await FirebaseFirestore.instance.collection('subscription_payments').add({
+        'user_id': userId,
+        'amount': amount,
+        'timestamp': currentTime,
+      });
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      // Navigate to congratulations page
+      Navigator.pushNamed(context, "/congratulations");
+    } catch (e) {
+      print("Error updating student record: $e");
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +151,8 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                           fontWeight: FontWeight.w400,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFD9D9D9)),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         focusedBorder: const OutlineInputBorder(
@@ -126,16 +171,7 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                       height: 54,
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          // Simulating verification process
-                          Future.delayed(const Duration(seconds: 2), () {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            Navigator.pushNamed(context, "/congratulations");
-                          });
+                          paySubscription();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2B5BBA),

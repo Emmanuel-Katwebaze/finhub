@@ -78,7 +78,7 @@ class _WithdrawMethodState extends State<WithdrawMethod> {
                 ),
                 ListTile(
                   title: const Text(
-                    "Make Payment",
+                    "Bank",
                     style: TextStyle(
                         fontSize: 25,
                         color: Color(0xFF433D3D),
@@ -105,7 +105,7 @@ class _WithdrawMethodState extends State<WithdrawMethod> {
                 ),
                 ListTile(
                   title: const Text(
-                    "Mobile Money Topup",
+                    "Mobile Money Top Up",
                     style: TextStyle(
                         fontSize: 25,
                         color: Color(0xFF433D3D),

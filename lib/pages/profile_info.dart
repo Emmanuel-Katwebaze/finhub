@@ -61,7 +61,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     } else if (webImage != null) {
       return MemoryImage(webImage!);
     }
-    return AssetImage('images/Rectangle 38.png');
+    return AssetImage('images/avatar@3x.png');
   }
 
   @override

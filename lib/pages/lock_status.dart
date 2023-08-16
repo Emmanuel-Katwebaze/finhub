@@ -115,26 +115,7 @@ class LockStatusState extends State<LockStatus> {
                           _selectedFrequency = value.toString();
                         });
                       },
-                    ),
-                    RadioListTile<String>(
-                      activeColor: const Color(0xFF2B5BBA),
-                      title: const Text(
-                        'Lock without interest',
-                        style: TextStyle(
-                          color: Color(0xFF433D3D),
-                          fontFamily: 'Questrial',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      value: 'Lock without interest',
-                      groupValue: _selectedFrequency,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedFrequency = value.toString();
-                        });
-                      },
-                    ),
+                    ),                    
                     RadioListTile<String>(
                       activeColor: const Color(0xFF2B5BBA),
                       title: const Text(

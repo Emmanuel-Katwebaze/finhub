@@ -188,15 +188,16 @@ class _SignInState extends State<SignIn> {
                         setState(() {
                           _isLoading = true;
                         });
-                        Future.delayed(
-                          const Duration(seconds: 2),
-                          () {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            Navigator.pushNamed(context, "/savings_screen");
-                          },
-                        );
+                        handleSubmit(context);
+                        // Future.delayed(
+                        //   const Duration(seconds: 2),
+                        //   () {
+                        //     setState(() {
+                        //       _isLoading = false;
+                        //     });
+                        //     Navigator.pushNamed(context, "/savings_screen");
+                        //   },
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF2B5BBA),

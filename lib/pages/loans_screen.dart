@@ -56,7 +56,7 @@ class _LoansScreenState extends State<LoansScreen> {
                 ),
               ),
               Positioned(
-                bottom: -100,
+                bottom: -50,
                 left: 0,
                 right: 0,
                 child: Center(
@@ -157,31 +157,6 @@ class _LoansScreenState extends State<LoansScreen> {
                             ),
                           ],
                         ),
-                        const Divider(
-                          color: Color(0xFFA0A0A0),
-                          thickness: 1.0,
-                        ),
-                        const Text(
-                          "We provide different loan packages to suit your needs",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF433D3D),
-                            fontFamily: 'Questrial',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          "Explore",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF2B5BBA),
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -190,7 +165,7 @@ class _LoansScreenState extends State<LoansScreen> {
             ],
           ),
           const SizedBox(
-            height: 130,
+            height: 90,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -226,8 +201,8 @@ class _LoansScreenState extends State<LoansScreen> {
                       route: "/loan_packages",
                     ),
                     LoansScreenCard(
-                      color: Color(0xFFFBB0B0),
-                      dotColor: Color(0xFFF7ACAC),
+                      color: Color(0xFFD158FC),
+                      dotColor: Color(0xFFE597F9),
                       imageUrl: "images/walletmoney.png",
                       text: "Loan Payment",
                       route: "/loan_repayment_main",
@@ -248,8 +223,8 @@ class _LoansScreenState extends State<LoansScreen> {
                       route: "/make_early_repayment",
                     ),
                     LoansScreenCard(
-                      color: Color(0xFF030C1E),
-                      dotColor: Color(0xFF051636),
+                      color: Color(0xFFABBCDC),
+                      dotColor: Color(0xFFCCDBF8),
                       imageUrl: "images/pictureframe.png",
                       text: "Loan Breakdown",
                       route: "/loan_breakdown",

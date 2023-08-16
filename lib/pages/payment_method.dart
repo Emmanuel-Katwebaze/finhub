@@ -262,7 +262,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         setState(() {
                           _isLoading = false;
                         });
-                        Navigator.pushNamed(context, "/enter_phone");
+                        Navigator.pushNamed(context, "/enter_phone_no2");
                       },
                     );
                   }

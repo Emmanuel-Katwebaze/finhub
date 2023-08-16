@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:finhub/firebase_auth/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:email_otp/email_otp.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:finhub/pages/student_provider.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key});
@@ -10,12 +18,14 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
-  final usernameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final fullnameController = TextEditingController();
   final passwordController = TextEditingController();
   final studentNumberController = TextEditingController();
   final confirmpasswordController = TextEditingController();
   final universityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   bool _obscureText = true;
   bool _obscureText2 = true;
   bool _isLoading = false;
@@ -28,14 +38,159 @@ class _SignUpState extends State<SignUp> {
     'ISBAT',
   ];
 
-  handleSubmit(BuildContext context) async {
+  // handleSubmit(BuildContext context) async {
+  //   if (_formKey.currentState!.validate()) {
+  //     final email = emailController.value.text;
+  //     final password = passwordController.value.text;
+  //     _isLoading = true;
+  //     await Auth().registerWithEmailAndPassword(email, password, context);
+  //   }
+  // }
+
+  // void handleSubmit(BuildContext context) async {
+  //   // Create a MongoDB connection instance
+  //   final mongo.Db db = mongo.Db('mongodb://localhost:27017/finhub');
+  //   // final email = emailController.value.text;
+  //   // final password = passwordController.value.text;
+
+  //   const email = "emmakatwebaze@gmail.com";
+  //   const password = "12345678";
+
+  //   // final student = {
+  //   //   'email': email,
+  //   //   'password': password,
+  //   //   'full_name': fullnameController.value.text,
+  //   //   'phone_number': phoneNumberController.value.text,
+  //   //   'student_number': studentNumberController.value.text,
+  //   //   'university': selectedValue,
+  //   // };
+
+  //   final student = {
+  //     'email': "emmakatwebaze@gmail.com",
+  //     'password': "12345678",
+  //     'full_name': "Katwebaze Emmanuel",
+  //     'phone_number': "07771217",
+  //     'student_number': "210019921",
+  //     'university': "Makerere University",
+  //   };
+
+  //   print(student);
+
+  //   try {
+  //     // Open the MongoDB connection
+  //     await db.open();
+
+  //     // Insert the user data into the 'students' collection
+  //     final studentsCollection = db.collection('students');
+  //     await studentsCollection.insert(student);
+
+  //     // Close the MongoDB connection
+  //     await db.close();
+
+  //     _isLoading = true;
+  //     await Auth().registerWithEmailAndPassword(email, password, context);
+  //   } catch (e) {
+  //     print('Error: $e');
+  //     // Handle the error, show a snackbar, dialog, or other UI indication
+  //   }
+  // }
+
+  void handleSubmit(BuildContext context) async {
+    // Create a MongoDB connection instance
     if (_formKey.currentState!.validate()) {
       final email = emailController.value.text;
       final password = passwordController.value.text;
-      _isLoading = true;
-      await Auth().registerWithEmailAndPassword(email, password, context);
+
+      final student = {
+        'email': email,
+        'password': password,
+        'full_name': fullnameController.value.text,
+        'phone_number': phoneNumberController.value.text,
+        'student_number': studentNumberController.value.text,
+        'university': selectedValue,
+        'status': "unsubscribed"
+      };
+
+      print(student);
+         final prefs = await SharedPreferences.getInstance();
+        prefs.setString('student', jsonEncode(student));
+
+    EmailOTP myauth = EmailOTP();
+
+      try {
+        myauth.setConfig(
+          appEmail: "finhub@gmail.com",
+          appName: "FinHuB",
+          userEmail: email,
+          otpLength: 4,
+          otpType: OTPType.digitsOnly);
+
+          if (await myauth.sendOTP() == true) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("OTP has been sent")));
+      Navigator.pushNamed(context, "/verify_account");
+    }else{
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Oops OTP not sent")));
+    }
+
+        final studentRef = await FirebaseFirestore.instance
+            .collection('students')
+            .add(student);
+
+        final String userId = studentRef.id;
+
+        Provider.of<StudentProvider>(context, listen: false).studentId = userId;
+
+        // Register user with Auth
+        _isLoading = true;
+        await Auth().registerWithEmailAndPassword(email, password, context);
+      } catch (e) {
+        print("Error saving data to Firestore: $e");
+      }
     }
   }
+  // void handleSubmit(BuildContext context) async {
+  //   // Create a MongoDB connection instance
+  //   // final email = emailController.value.text;
+  //   // final password = passwordController.value.text;
+
+  //   const email = "emmakatwebaze@gmail.com";
+  //   const password = "12345678";
+
+  //   final student = {
+  //     'email': "emmakatwebaze@gmail.com",
+  //     'password': "12345678",
+  //     'full_name': "Katwebaze Emmanuel",
+  //     'phone_number': "07771217",
+  //     'student_number': "210019921",
+  //     'university': "Makerere University",
+  //   };
+  //   final prefs = await SharedPreferences.getInstance();
+  //       prefs.setString('student', jsonEncode(student));
+
+  //   EmailOTP myauth = EmailOTP();
+
+  //   try {
+  //     myauth.setConfig(
+  //         appEmail: "finhub@gmail.com",
+  //         appName: "FinHuB",
+  //         userEmail: "omojo2001@gmail.com",
+  //         otpLength: 4,
+  //         otpType: OTPType.digitsOnly);
+  //   } catch (e) {
+  //     print("Error saving data to Firestore: $e");
+  //   }
+
+  //   if (await myauth.sendOTP() == true) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(const SnackBar(content: Text("OTP has been sent")));
+  //     Navigator.pushNamed(context, "/verify_account");
+  //   }else{
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(const SnackBar(content: Text("Oops OTP not sent")));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +275,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           TextFormField(
                             cursorColor: const Color(0xFF4246B7),
-                            controller: usernameController,
+                            controller: fullnameController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your full name';
@@ -185,7 +340,7 @@ class _SignUpState extends State<SignUp> {
                           const SizedBox(height: 25),
                           TextFormField(
                             cursorColor: const Color(0xFF4246B7),
-                            controller: emailController,
+                            controller: phoneNumberController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your phone number';
@@ -408,13 +563,13 @@ class _SignUpState extends State<SignUp> {
                           _isLoading = true;
                         });
 
+                        handleSubmit(context);
                         Future.delayed(
                           const Duration(seconds: 2),
                           () {
                             setState(() {
                               _isLoading = false;
                             });
-                            Navigator.pushNamed(context, "/verify_account");
                           },
                         );
                       },
@@ -480,17 +635,6 @@ class _SignUpState extends State<SignUp> {
           ],
         ),
       ),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.chevron_left),
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //     color: Colors.black,
-      //   ),
-      // ),
     );
   }
 }

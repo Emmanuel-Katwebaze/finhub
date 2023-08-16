@@ -1,11 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import 'package:finhub/pages/student_provider.dart';
-import 'package:finhub/firebase_auth/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class EnterPhoneNumber2 extends StatefulWidget {
   const EnterPhoneNumber2({super.key});
@@ -21,45 +16,6 @@ class _EnterPhoneNumber2State extends State<EnterPhoneNumber2> {
   int initiatingFee = 5000;
   final _formKey = GlobalKey<FormState>();
 
-  void paySubscription() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    final String userId =
-        Provider.of<StudentProvider>(context, listen: false).studentId;
-    final amount = 5000;
-    final currentTime = FieldValue.serverTimestamp();
-
-    // Update student's status and add payment record
-    final studentRef =
-        FirebaseFirestore.instance.collection('students').doc(userId);
-
-    try {
-      await studentRef.update({
-        'status': 'subscribed',
-      });
-
-      await FirebaseFirestore.instance.collection('subscription_payments').add({
-        'user_id': userId,
-        'amount': amount,
-        'timestamp': currentTime,
-      });
-
-      setState(() {
-        _isLoading = false;
-      });
-
-      // Navigate to congratulations page
-      Navigator.pushNamed(context, "/congratulations");
-    } catch (e) {
-      print("Error updating student record: $e");
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   Future<void> _sendMoney() async {
     if (_formKey.currentState!.validate()) {
       String baseUrl = "http://localhost:4040";
@@ -68,52 +24,66 @@ class _EnterPhoneNumber2State extends State<EnterPhoneNumber2> {
       String recipientNumber = phoneNumberController.text;
       int amount = initiatingFee;
 
+      Map<String, dynamic> requestPayload = {
+        "payee": {
+          "name": "Bob bobbington",
+          "partyIdInfo": {
+            "fspId": "dfspb",
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "16135551212"
+          }
+        },
+        "payer": {
+          "partyIdType": "THIRD_PARTY_LINK",
+          "partyIdentifier": "16135551212",
+          "fspId": "dfspa"
+        },
+        "amountType": "RECEIVE",
+        "amount": {"currency": "USD", "amount": "123.47"},
+        "transactionType": {
+          "scenario": "DEPOSIT",
+          "initiator": "PAYER",
+          "initiatorType": "CONSUMER"
+        },
+        "expiration": "2021-05-24T08:38:08.699-04:00"
+      };
+
+      var payload = jsonEncode(requestPayload);
+
+      var url = Uri.parse(
+          '$baseUrl/thirdpartyTransaction/$transactionRequestId/initiate');
       try {
-        var partyLookupResponse = await http.post(
-          Uri.parse('$baseUrl/thirdpartyTransaction/partyLookup'),
+        var initiateResponse = await http.post(
+          url,
+          body: payload,
           headers: {'Content-Type': 'application/json'},
-          body: jsonEncode({
-            "transactionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-            "payee": {"partyIdType": "MSISDN", "partyIdentifier": "16135551212"}
-          }),
         );
-        if (partyLookupResponse.statusCode == 200) {
-          Map<String, dynamic> requestPayload = {
-            "payee": {
-              "name": "Bob bobbington",
-              "partyIdInfo": {
-                "fspId": "dfspb",
-                "partyIdType": "MSISDN",
-                "partyIdentifier": "16135551212"
-              }
-            },
-            "payer": {
-              "partyIdType": "THIRD_PARTY_LINK",
-              "partyIdentifier": "16135551212",
-              "fspId": "dfspa"
-            },
-            "amountType": "RECEIVE",
-            "amount": {"currency": "USD", "amount": "123.47"},
-            "transactionType": {
-              "scenario": "DEPOSIT",
-              "initiator": "PAYER",
-              "initiatorType": "CONSUMER"
-            },
-            "expiration": "2021-05-24T08:38:08.699-04:00"
-          };
+        if (initiateResponse.statusCode == 200) {
+          Map<String, dynamic> payeeDetails = jsonDecode(initiateResponse.body);
+          String payeeNumber = payeeDetails["authorization"]["payee"]
+              ["partyIdInfo"]["partyIdentifier"];
+          String payeeIdType = payeeDetails["authorization"]["payee"]
+              ["partyIdInfo"]["partyIdType"];
+          String amountToSend =
+              payeeDetails["authorization"]["transferAmount"]["amount"];
+          String currencyToSend =
+              payeeDetails["authorization"]["transferAmount"]["currency"];
 
-          var payload = jsonEncode(requestPayload);
-          var url = Uri.parse(
-              '$baseUrl/thirdpartyTransaction/$transactionRequestId/initiate');
-          var initiateResponse = await http.post(
-            url,
-            body: payload,
+          var partyLookupResponse = await http.post(
+            Uri.parse('$baseUrl/thirdpartyTransaction/partyLookup'),
             headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              "transactionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+              "payee": {
+                "partyIdType": payeeIdType,
+                "partyIdentifier": payeeNumber
+              }
+            }),
           );
-
-          if (initiateResponse.statusCode == 200) {
+          if (partyLookupResponse.statusCode == 200) {
             Map<String, dynamic> partyLookupResponseDetails =
                 jsonDecode(partyLookupResponse.body);
+            String payeeName = partyLookupResponseDetails["party"]["name"];
 
             // ignore: use_build_context_synchronously
             showDialog(
@@ -142,6 +112,15 @@ class _EnterPhoneNumber2State extends State<EnterPhoneNumber2> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Text(
+                        "Payment initiated by Merchant: $payeeName",
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF433D3D),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                       Text(
                         "Recipient Number: $recipientNumber",
                         style: const TextStyle(
@@ -198,9 +177,58 @@ class _EnterPhoneNumber2State extends State<EnterPhoneNumber2> {
                           Navigator.pop(
                               context); // Close the confirmation dialog
 
-                          paySubscription();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                actionsPadding: const EdgeInsets.all(20),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 20,
+                                ),
+                                titlePadding: EdgeInsets.all(20),
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                title: const Text(
+                                  "Congratulations!",
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Color(0xFF2B5BBA),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                content: const Text(
+                                  "Payment successful.",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFF433D3D),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        context), // Close the success dialog
+                                    child: const Text(
+                                      "OK",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color(0xFF2B5BBA),
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         } else {
-                          // ignore: use_build_context_synchronously
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {

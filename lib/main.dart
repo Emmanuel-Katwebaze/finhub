@@ -45,15 +45,24 @@ import 'package:finhub/pages/contact_us.dart';
 import 'package:finhub/pages/contacts.dart';
 import 'package:finhub/pages/password_reset.dart';
 import 'package:finhub/pages/messages_screen.dart';
-//
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:finhub/pages/enter_phone_no2.dart';
 import 'package:finhub/pages/mobile_money_topup.dart';
 import 'package:finhub/pages/make_payment.dart';
 
+import 'package:provider/provider.dart';
+import 'package:finhub/pages/student_provider.dart'; 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+  await SharedPreferences.getInstance();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => StudentProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -107,7 +116,7 @@ class MyApp extends StatelessWidget {
         '/enter_phone_no2': (context) => EnterPhoneNumber2(),
         '/mojaloop': (context) => SendMoneyScreen(),
         '/withdraw': (context) => WithdrawMethod(),
-        '/mobile_money_topup': (context) => MobileMoneyTopup(),
+        '/mobile_money_topup': (context) => MobileMoneyTopUp(),
         '/verification_details': (context) => VerificationDetails(),
         '/make_payment': (context) => MakePayment(),
         // '/complete_profile': (context) => CompleteProfile(),

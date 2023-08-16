@@ -59,7 +59,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         tileColor: Colors.white,
                         leading: const CircleAvatar(
                           backgroundImage:
-                              AssetImage('images/Rectangle 38.png'),
+                              AssetImage('images/avatar@3x.png'),
                           radius: 25.0,
                         ),
                         title: const Text(

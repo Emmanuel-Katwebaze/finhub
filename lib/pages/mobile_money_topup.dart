@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MobileMoneyTopup extends StatefulWidget {
-  const MobileMoneyTopup({super.key});
+class MobileMoneyTopUp extends StatefulWidget {
+  const MobileMoneyTopUp({super.key});
 
   @override
-  State<MobileMoneyTopup> createState() => _MobileMoneyTopupState();
+  State<MobileMoneyTopUp> createState() => _MobileMoneyTopUpState();
 }
 
-class _MobileMoneyTopupState extends State<MobileMoneyTopup> {
+class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
   bool _isLoading = false;
   final amountController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String selectedValue = 'Plan name 1';
   List<String> plan = [
@@ -61,7 +62,7 @@ class _MobileMoneyTopupState extends State<MobileMoneyTopup> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Mobile Money Topup',
+                        'Mobile Money Top Up',
                         style: TextStyle(
                           fontSize: 30,
                           color: Color(0xFF050901),
@@ -71,7 +72,7 @@ class _MobileMoneyTopupState extends State<MobileMoneyTopup> {
                       ),
                     ),
                     const Text(
-                      "Please enter the withdraw amount and choose a plan",
+                      "Please enter the number, amount and select a plan",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
@@ -80,6 +81,53 @@ class _MobileMoneyTopupState extends State<MobileMoneyTopup> {
                     ),
                     const SizedBox(
                       height: 30,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Phone Number",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFF433D3D),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      cursorColor: const Color(0xFF4246B7),
+                      controller: phoneNumberController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "0770000000",
+                        hintStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF828282),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Color(0xFFD9D9D9)),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.all(20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
                     ),
                     const Align(
                       alignment: Alignment.centerLeft,
@@ -106,7 +154,7 @@ class _MobileMoneyTopupState extends State<MobileMoneyTopup> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "e.g 5000",
+                        hintText: "5000",
                         hintStyle: const TextStyle(
                           fontSize: 20,
                           color: Color(0xFF828282),

@@ -14,7 +14,7 @@ class Auth {
         password: password,
       );
       // Account creation successful, navigate to '/dashboard'
-      Navigator.pushNamed(context, '/verify_account');
+      Navigator.pushNamed(context, '/enter_phone_no');
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';
       if (e.code == 'weak-password') {
