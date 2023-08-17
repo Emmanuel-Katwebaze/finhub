@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:finhub/components/plan_summary_row.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finhub/firebase_auth/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class PlanSummary extends StatefulWidget {
   const PlanSummary({super.key});
@@ -10,6 +16,102 @@ class PlanSummary extends StatefulWidget {
 
 class _PlanSummaryState extends State<PlanSummary> {
   bool _isLoading = false;
+
+  Map<String, dynamic> _planSummary = {};
+
+  String? userId;
+
+  Future<void> getStudentId() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await FirebaseFirestore.instance
+              .collection('students')
+              .where('email', isEqualTo: user.email)
+              .get();
+      print(user.email);
+      if (snapshot.size > 0) {
+        final DocumentSnapshot<Map<String, dynamic>> studentDoc =
+            snapshot.docs.first;
+        userId = studentDoc.id;
+        print(studentDoc);
+        print(studentDoc.id);
+        print(userId);
+      }
+    }else{
+      userId = null; 
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPlanSummary();
+    _initializeData();
+  }
+
+  Future<void> _loadPlanSummary() async {
+    final prefs = await SharedPreferences.getInstance();
+    final plan = prefs.getString('plan');
+    if (plan != null) {
+      setState(() {
+        _planSummary = jsonDecode(plan);
+      });
+    }
+  }
+
+  Future<void> _initializeData() async {
+    await getStudentId(); // Wait for getStudentId() to complete
+    
+  }
+
+  void createPlan() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Save plan summary to Firestore
+    final CollectionReference plansCollection =
+        FirebaseFirestore.instance.collection('plans');
+    final CollectionReference withdrawCollection =
+        FirebaseFirestore.instance.collection('withdraw');
+    final CollectionReference savingCollection =
+        FirebaseFirestore.instance.collection('saving');
+
+    try {
+      DocumentReference planDocRef = await plansCollection.add({
+        'plan_name':  _planSummary['name'],
+        'amount_saved': 0,
+        'amount_per_frequency': _planSummary['amount'],
+        'frequency': _planSummary['frequency'],
+        'start_date': _planSummary['start_date'],
+        'final_withdraw_date': _planSummary['start_date'],
+        'interest_rate': _planSummary['interest_rate'],
+        'account_status': _planSummary['lockStatus'],
+      });
+
+      
+
+      print(userId);
+      DocumentReference savingDocRef = await savingCollection.add({
+        'student_id': userId,
+        'plan_id': planDocRef.id,
+      });
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      Navigator.pushNamed(context, '/bottom_nav');
+    } catch (error) {
+      // Handle error
+      print('Error saving plan: $error');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,23 +209,29 @@ class _PlanSummaryState extends State<PlanSummary> {
                 const SizedBox(
                   height: 60,
                 ),
-                const PlanSummaryRow(
-                    keyText: "Periodic Amount", valueText: "UGX 20,000"),
+                PlanSummaryRow(
+                    keyText: "Periodic Amount",
+                    valueText: "UGX ${_planSummary['amount']}"),
                 const SizedBox(height: 20),
-                const PlanSummaryRow(
-                    keyText: "Frequency", valueText: "Monthly"),
+                PlanSummaryRow(
+                    keyText: "Frequency",
+                    valueText: "${_planSummary['frequency']}"),
                 const SizedBox(height: 20),
-                const PlanSummaryRow(
-                    keyText: "Start Date", valueText: "12/06/2023"),
+                PlanSummaryRow(
+                    keyText: "Start Date",
+                    valueText: "${_planSummary['start_date']}"),
                 const SizedBox(height: 20),
-                const PlanSummaryRow(
-                    keyText: "Withdraw Date", valueText: "12/06/2026"),
+                PlanSummaryRow(
+                    keyText: "Withdraw Date",
+                    valueText: "${_planSummary['withdraw_date']}"),
                 const SizedBox(height: 20),
-                const PlanSummaryRow(
-                    keyText: "Interest Rate", valueText: "3% per annum"),
+                PlanSummaryRow(
+                    keyText: "Interest Rate",
+                    valueText: "${_planSummary['interest_rate']}"),
                 const SizedBox(height: 20),
-                const PlanSummaryRow(
-                    keyText: "Lock Status", valueText: "Locked"),
+                PlanSummaryRow(
+                    keyText: "Lock Status",
+                    valueText: "${_planSummary['lockStatus']}"),
                 const SizedBox(
                   height: 150,
                 ),
@@ -137,9 +245,7 @@ class _PlanSummaryState extends State<PlanSummary> {
                       });
                       // Simulating verification process
                       Future.delayed(const Duration(seconds: 2), () {
-                        setState(() {
-                          _isLoading = false;
-                        });
+                        createPlan();
                         Navigator.pushNamed(context, '/bottom_nav');
                       });
                     },

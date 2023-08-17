@@ -8,7 +8,7 @@ class Badges extends StatefulWidget {
 }
 
 class _BadgesState extends State<Badges> {
-  bool reward = true;
+  bool reward = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _BadgesState extends State<Badges> {
             child: Column(
               children: [
                 Image.asset(
-                  'images/Logo-big.png',
+                  'images/Group.png',
                   height: 100.0,
                 ),
                 const Text(

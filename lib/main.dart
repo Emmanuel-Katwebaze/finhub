@@ -7,6 +7,7 @@ import 'package:finhub/pages/congratulations_page.dart';
 import 'package:finhub/pages/loan_received.dart';
 import 'package:finhub/pages/savings_screen.dart';
 import 'package:finhub/pages/saving_duration.dart';
+import 'package:finhub/pages/saving_duration_unlocked.dart';
 import 'package:finhub/pages/savings_frequency.dart';
 import 'package:finhub/pages/loan_summary.dart';
 import 'package:finhub/pages/loan_calculator.dart';
@@ -52,6 +53,8 @@ import 'package:finhub/pages/make_payment.dart';
 
 import 'package:provider/provider.dart';
 import 'package:finhub/pages/student_provider.dart'; 
+import 'package:finhub/pages/plan_pay.dart'; 
+import 'package:finhub/pages/plan_payment_method.dart'; 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -101,6 +104,7 @@ class MyApp extends StatelessWidget {
         '/new_saving_plan': (context) => const NewSavingPlan(),
         '/savings_screen': (context) => const SavingScreen(),
         '/saving_duration': (context) => const SavingDuration(),
+        '/saving_duration_unlocked': (context) => const SavingDurationUnlocked(),
         '/lock_status': (context) => const LockStatus(),
         '/send_money_screen': (context) => SendMoneyScreen(),
         '/about_us': (context) => const AboutUs(),
@@ -119,7 +123,10 @@ class MyApp extends StatelessWidget {
         '/mobile_money_topup': (context) => MobileMoneyTopUp(),
         '/verification_details': (context) => VerificationDetails(),
         '/make_payment': (context) => MakePayment(),
+        '/plan_pay': (context) => PlanPay(),
+        '/plan_payment_method': (context) => PlanPaymentMethod(),
         // '/complete_profile': (context) => CompleteProfile(),
+
       },
     );
   }

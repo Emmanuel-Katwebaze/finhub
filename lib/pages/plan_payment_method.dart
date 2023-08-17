@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PaymentMethod extends StatefulWidget {
-  const PaymentMethod({super.key});
+class PlanPaymentMethod extends StatefulWidget {
+  const PlanPaymentMethod({super.key});
 
   @override
-  State<PaymentMethod> createState() => _PaymentMethodState();
+  State<PlanPaymentMethod> createState() => _PlanPaymentMethodState();
 }
 
-class _PaymentMethodState extends State<PaymentMethod> {
+class _PlanPaymentMethodState extends State<PlanPaymentMethod> {
   bool _isLoading = false;
   String? selectedOption;
   final bankController = TextEditingController();
@@ -262,7 +262,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         setState(() {
                           _isLoading = false;
                         });
-                        Navigator.pushNamed(context, "/enter_phone_no");
+                        Navigator.pushNamed(context, "/plan_pay");
                       },
                     );
                   }
@@ -274,7 +274,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         setState(() {
                           _isLoading = false;
                         });
-                        Navigator.pushNamed(context, "/enter_phone_no");
+                        Navigator.pushNamed(context, "/plan_pay");
                       },
                     );
                   }

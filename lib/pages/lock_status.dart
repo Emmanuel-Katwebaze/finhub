@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class LockStatus extends StatefulWidget {
   const LockStatus({super.key});
@@ -8,19 +10,38 @@ class LockStatus extends StatefulWidget {
 }
 
 class LockStatusState extends State<LockStatus> {
-  late TextEditingController _planNameController;
-  String _selectedFrequency = '';
+  String _selectedLockStatus = '';
+  final _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    _planNameController = TextEditingController();
-  }
+  void submit() async {
+    final lockStatus = _selectedLockStatus;
+    final prefs = await SharedPreferences.getInstance();
+    final planString = prefs.getString('plan');
+    if (_selectedLockStatus == 'Locked') {
+      if (planString != null) {
+        Map<String, dynamic> plan = jsonDecode(planString);
+        plan['lockStatus'] = lockStatus;
 
-  @override
-  void dispose() {
-    _planNameController.dispose();
-    super.dispose();
+        prefs.setString('plan', jsonEncode(plan)); // Update the stored plan
+
+        print(plan);
+      }
+
+      // Navigate to the next screen (replace '/savings_complete' with the correct route)
+      Navigator.pushNamed(context, "/saving_duration");
+    }else{
+      if (planString != null) {
+        Map<String, dynamic> plan = jsonDecode(planString);
+        plan['lockStatus'] = lockStatus;
+
+        prefs.setString('plan', jsonEncode(plan)); // Update the stored plan
+
+        print(plan);
+      }
+
+      // Navigate to the next screen (replace '/savings_complete' with the correct route)
+      Navigator.pushNamed(context, "/saving_duration_unlocked");
+    }
   }
 
   @override
@@ -93,49 +114,52 @@ class LockStatusState extends State<LockStatus> {
                 ),
               ),
               const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    RadioListTile<String>(
-                      activeColor: const Color(0xFF2B5BBA),
-                      title: const Text(
-                        'Lock with Interest',
-                        style: TextStyle(
-                          color: Color(0xFF433D3D),
-                          fontFamily: 'Questrial',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      RadioListTile<String>(
+                        activeColor: const Color(0xFF2B5BBA),
+                        title: const Text(
+                          'Lock with Interest',
+                          style: TextStyle(
+                            color: Color(0xFF433D3D),
+                            fontFamily: 'Questrial',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
+                        value: 'Locked',
+                        groupValue: _selectedLockStatus,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedLockStatus = value.toString();
+                          });
+                        },
                       ),
-                      value: 'Lock with Interest',
-                      groupValue: _selectedFrequency,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedFrequency = value.toString();
-                        });
-                      },
-                    ),                    
-                    RadioListTile<String>(
-                      activeColor: const Color(0xFF2B5BBA),
-                      title: const Text(
-                        "Don't Lock",
-                        style: TextStyle(
-                          color: Color(0xFF433D3D),
-                          fontFamily: 'Questrial',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
+                      RadioListTile<String>(
+                        activeColor: const Color(0xFF2B5BBA),
+                        title: const Text(
+                          "Don't Lock",
+                          style: TextStyle(
+                            color: Color(0xFF433D3D),
+                            fontFamily: 'Questrial',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
+                        value: "Unlocked",
+                        groupValue: _selectedLockStatus,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedLockStatus = value.toString();
+                          });
+                        },
                       ),
-                      value: "Don't Lock",
-                      groupValue: _selectedFrequency,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedFrequency = value.toString();
-                        });
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 250),
@@ -144,7 +168,7 @@ class LockStatusState extends State<LockStatus> {
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/saving_duration");
+                    submit();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2B5BBA),

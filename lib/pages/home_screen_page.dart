@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:finhub/components/articles.dart';
 import 'package:finhub/components/events_reminders.dart';
 import 'package:finhub/components/badges.dart';
+import 'package:finhub/firebase_auth/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:finhub/pages/student_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class HomeScreenPage extends StatefulWidget {
   const HomeScreenPage({Key? key});
@@ -19,6 +25,28 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     setState(() {
       _isBoxVisible = !_isBoxVisible;
     });
+  }
+
+  void signout(BuildContext context) async {
+    await Auth().signOut(context);
+  }
+
+  int totalAmountSaved = 0;
+
+  void calculateTotalAmountSaved() async {
+    final snapshot = await FirebaseFirestore.instance.collection('plans').get();
+    snapshot.docs.forEach((doc) {
+      final amountSaved = doc['amount_saved'] as int? ?? 0;
+      setState(() {
+        totalAmountSaved += amountSaved;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    calculateTotalAmountSaved();
   }
 
   @override
@@ -113,11 +141,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Align(
+                              Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "UGX 120,000",
-                                  style: TextStyle(
+                                  "UGX $totalAmountSaved",
+                                  style: const TextStyle(
                                     fontSize: 30,
                                     color: Color(0xFFF1F1F1),
                                     fontFamily: 'Questrial',
@@ -268,10 +296,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 _buildMenuItem("Welcome", () {
-                                  Navigator.of(context).pushNamed('/savings_screen');
+                                  Navigator.of(context)
+                                      .pushNamed('/savings_screen');
                                 }),
                                 _buildMenuItem("Sign Out", () {
-                                  Navigator.of(context).pushNamed('/sign_in');
+                                  signout(context);
                                 }),
                               ],
                             ),

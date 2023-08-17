@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-class SavingDuration extends StatefulWidget {
-  const SavingDuration({super.key});
+class SavingDurationUnlocked extends StatefulWidget {
+  const SavingDurationUnlocked({super.key});
 
   @override
-  State<SavingDuration> createState() => SavingDurationState();
+  State<SavingDurationUnlocked> createState() => SavingDurationUnlockedState();
 }
 
-class SavingDurationState extends State<SavingDuration> {
+class SavingDurationUnlockedState extends State<SavingDurationUnlocked> {
   final _dateFormat = DateFormat("yyyy-MM-dd");
   late TextEditingController _startDateController;
   late TextEditingController _withdrawDateController;
@@ -34,15 +34,15 @@ class SavingDurationState extends State<SavingDuration> {
   }
 
   void submit() async {
-    final start_date = _startDateController.value.text;
-    final withdraw_date = _withdrawDateController.value.text;
+    final startDate = _startDateController.value.text;
+    const withdrawDate = "N/A";
     final prefs = await SharedPreferences.getInstance();
     final planString = prefs.getString('plan');
 
     if (planString != null) {
       Map<String, dynamic> plan = jsonDecode(planString);
-      plan['start_date'] = start_date;
-      plan['withdraw_date'] = withdraw_date;
+      plan['start_date'] = startDate;
+      plan['withdraw_date'] = withdrawDate;
 
       prefs.setString('plan', jsonEncode(plan)); // Update the stored plan
 
@@ -203,52 +203,6 @@ class SavingDurationState extends State<SavingDuration> {
                         },
                         decoration: InputDecoration(
                           hintText: "Select start date",
-                          hintStyle: const TextStyle(
-                            fontSize: 20,
-                            color: Color(0xFF828282),
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD9D9D9)),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFCDCDCD)),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          contentPadding: EdgeInsets.all(20),
-                          suffixIcon: const Icon(
-                            Icons.calendar_month,
-                            color: Color(0xFF9C9D9E),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 25),
-                      const Text(
-                        'Withdraw date',
-                        style: TextStyle(
-                          color: Color(0xFF433D3D),
-                          fontFamily: 'Questrial',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        controller: _withdrawDateController,
-                        onTap: () => _selectWithdrawDate(context),
-                        readOnly: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Select withdraw date",
                           hintStyle: const TextStyle(
                             fontSize: 20,
                             color: Color(0xFF828282),

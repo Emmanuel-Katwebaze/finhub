@@ -1,129 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:finhub/pages/student_provider.dart';
 import 'package:finhub/firebase_auth/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-class MobileMoneyTopUp extends StatefulWidget {
-  const MobileMoneyTopUp({Key? key});
+class PlanPay extends StatefulWidget {
+  const PlanPay({super.key});
 
   @override
-  State<MobileMoneyTopUp> createState() => _MobileMoneyTopUpState();
+  State<PlanPay> createState() => _PlanPayState();
 }
 
-class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
+class _PlanPayState extends State<PlanPay> {
   bool _isLoading = false;
-  final amountController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  final amountToSaveController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  String selectedValue = '';
-  List<String> plans = [];
-  late String selectedPlanId;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchPlans();
-    _initializeData();
-  }
-
-  Future<void> _initializeData() async {
-    await getStudentId(); // Wait for getStudentId() to complete
-    
-  }
-
-  Future<void> _fetchPlans() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection('plans')
-        .where('account_status', isEqualTo: "Unlocked")
-        .get();
-    setState(() {
-      plans = snapshot.docs
-          .map<String>((doc) => doc['plan_name'] as String)
-          .toList();
-      if (plans.isNotEmpty) {
-        selectedValue = plans.first;
-        selectedPlanId = snapshot.docs.first.id;
-      }
-    });
-  }
-
-  String? userId;
-
-  Future<void> getStudentId() async {
-    final User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      final QuerySnapshot<Map<String, dynamic>> snapshot =
-          await FirebaseFirestore.instance
-              .collection('students')
-              .where('email', isEqualTo: user.email)
-              .get();
-      print(user.email);
-      if (snapshot.size > 0) {
-        final DocumentSnapshot<Map<String, dynamic>> studentDoc =
-            snapshot.docs.first;
-        userId = studentDoc.id;
-        print(studentDoc);
-        print(studentDoc.id);
-        print(userId);
-      }
-    }else{
-      userId = null; 
-    }
-  }
-
-  void withdraw() async {
+  void pay() async {
     final prefs = await SharedPreferences.getInstance();
-
+    final selectedPlanId = prefs.getString('selectedPlanId') ?? '';
     setState(() {
       _isLoading = true;
     });
+    final planRef =
+        FirebaseFirestore.instance.collection('plans').doc(selectedPlanId);
+
     try {
-      final planRef =
-          FirebaseFirestore.instance.collection('plans').doc(selectedPlanId);
-      final CollectionReference withdrawCollection =
-        FirebaseFirestore.instance.collection('withdraw');
-
-
-          // Create a corresponding "withdraw" document
-      DocumentReference withdrawDocRef = await withdrawCollection.add({
-        'withdraw_date': DateTime.now(),
-        'withdraw_amount': int.parse(amountController.text),
-        'plan_id': selectedPlanId,
-        'student_id': userId,
-      });
-
       // Fetch the document data first
       DocumentSnapshot snapshot = await planRef.get();
 
       if (snapshot.exists) {
         Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+        int currentAmountSaved = (data?['amount_saved'] ?? 0) as int;
 
-        if (data != null) {
-          int currentAmountSaved = (data['amount_saved'] ?? 0) as int;
-
-          // Update the 'amount_saved' field by subtracting the new value
-          await planRef.update({
-            'amount_saved':
-                currentAmountSaved - int.parse(amountController.text),
-          });
-
-          await planRef.update({
-            'amount_saved':
-                currentAmountSaved - int.parse(amountController.text),
-          });
-
-          // Navigate to congratulations page
-          Navigator.pushNamed(context, "/congratulations");
-        } else {
-          print('Data is null');
-        }
+        // Update the 'amount_saved' field by adding the new value
+        await planRef.update({
+          'amount_saved':
+              currentAmountSaved + int.parse(amountToSaveController.value.text),
+        });
+        // Navigate to congratulations page
+        Navigator.pushNamed(context, "/congratulations");
       } else {
         print('Document does not exist');
       }
@@ -133,10 +54,6 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
 
     await prefs.remove('selectedPlanId');
     await prefs.remove('save');
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   Future<void> _sendMoney() async {
@@ -157,6 +74,9 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
           }),
         );
         if (partyLookupResponse.statusCode == 200) {
+          Map<String, dynamic> partyLookupResponseDetails =
+              jsonDecode(partyLookupResponse.body);
+          print(partyLookupResponse.body);
           Map<String, dynamic> requestPayload = {
             "payee": {
               "name": "Bob bobbington",
@@ -191,9 +111,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
           );
 
           if (initiateResponse.statusCode == 200) {
-            Map<String, dynamic> partyLookupResponseDetails =
-                jsonDecode(partyLookupResponse.body);
-
+            print(initiateResponse.body);
             // ignore: use_build_context_synchronously
             showDialog(
               context: context,
@@ -208,7 +126,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   title: const Text(
-                    "Confirm Withdraw",
+                    "Confirm Payment",
                     style: TextStyle(
                       fontSize: 30,
                       color: Color(0xFF2B5BBA),
@@ -222,7 +140,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Phone Number: $recipientNumber",
+                        "Recipient Number: $recipientNumber",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
@@ -231,7 +149,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                         ),
                       ),
                       Text(
-                        "Amount: ${int.parse(amountController.value.text)} $selectedCurrency",
+                        "Amount: ${int.parse(amountToSaveController.value.text)} $selectedCurrency",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color(0xFF433D3D),
@@ -239,15 +157,32 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Text(
-                        "Plan: $selectedValue",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color(0xFF433D3D),
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        cursorColor: const Color(0xFF4246B7),
+                        decoration: InputDecoration(
+                          hintText: "Enter PIN",
+                          hintStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFF828282),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xFFD9D9D9)),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFCDCDCD)),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.all(20),
                         ),
-                      ),                      
+                      ),
                     ],
                   ),
                   actions: [
@@ -283,10 +218,11 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                         );
 
                         if (approveResponse.statusCode == 200) {
+                          print(approveResponse.body);
                           Navigator.pop(
                               context); // Close the confirmation dialog
 
-                          withdraw();
+                          pay();
                         } else {
                           // ignore: use_build_context_synchronously
                           showDialog(
@@ -469,7 +405,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Mobile Money Top Up',
+                          'Enter Phone number',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color(0xFF050901),
@@ -479,7 +415,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                         ),
                       ),
                       const Text(
-                        "Please enter the number, amount and select a plan",
+                        "Please enter your mobile account number",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color(0xFF433D3D),
@@ -513,7 +449,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: "0770000000",
+                          hintText: "e.g 0770000000",
                           hintStyle: const TextStyle(
                             fontSize: 20,
                             color: Color(0xFF828282),
@@ -533,9 +469,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                           contentPadding: EdgeInsets.all(20),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      const SizedBox(height: 20),
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -551,17 +485,17 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                         height: 15,
                       ),
                       TextFormField(
-                        keyboardType: TextInputType.number,
                         cursorColor: const Color(0xFF4246B7),
-                        controller: amountController,
+                        keyboardType: TextInputType.number,
+                        controller: amountToSaveController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter the amount';
+                            return 'Please enter your amount to save';
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: "5000",
+                          hintText: "eg 40000",
                           hintStyle: const TextStyle(
                             fontSize: 20,
                             color: Color(0xFF828282),
@@ -578,68 +512,7 @@ class _MobileMoneyTopUpState extends State<MobileMoneyTopUp> {
                           ),
                           fillColor: Colors.white,
                           filled: true,
-                          contentPadding: EdgeInsets.all(20),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Choose Plan",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xFF433D3D),
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFD9D9D9)),
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.all(5),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: selectedValue,
-                            isExpanded: true,
-                            icon: const Icon(Icons.arrow_drop_down,
-                                color: Color(0xFF828282)),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF828282),
-                            ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedValue = newValue!;
-                              });
-                            },
-                            items: plans
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    value,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xFF828282),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
+                          contentPadding: const EdgeInsets.all(20),
                         ),
                       ),
                       const SizedBox(

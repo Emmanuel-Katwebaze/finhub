@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChoosePlan extends StatefulWidget {
   ChoosePlan({Key? key});
@@ -10,12 +12,46 @@ class ChoosePlan extends StatefulWidget {
 class _ChoosePlanState extends State<ChoosePlan> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  String selectedValue = 'Plan name 1';
-  List<String> banks = [
-    'Plan name 1',
-    'Plan name 2',
-    'Plan name 3',
-  ];
+  late String selectedPlanId;
+  String selectedValue = '';
+  List<String> plans = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPlans();
+  }
+
+  Future<void> _fetchPlans() async {
+    final snapshot = await FirebaseFirestore.instance.collection('plans').get();
+    setState(() {
+      plans = snapshot.docs
+          .map<String>((doc) => doc['plan_name'] as String)
+          .toList();
+      if (plans.isNotEmpty) {
+        selectedValue = plans.first;
+        selectedPlanId = snapshot.docs.first.id;
+      }
+    });
+  }
+
+  submit() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Save selected plan's ID to SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('selectedPlanId', selectedPlanId);
+
+    // Simulating verification process
+    Future.delayed(const Duration(seconds: 2), () async {
+      setState(() {
+        _isLoading = false;
+      });
+      Navigator.of(context).pushReplacementNamed('/plan_payment_method');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +146,7 @@ class _ChoosePlanState extends State<ChoosePlan> {
                                       selectedValue = newValue!;
                                     });
                                   },
-                                  items: banks.map<DropdownMenuItem<String>>(
+                                  items: plans.map<DropdownMenuItem<String>>(
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
@@ -144,17 +180,7 @@ class _ChoosePlanState extends State<ChoosePlan> {
                       height: 54,
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          // Simulating verification process
-                          Future.delayed(const Duration(seconds: 2), () {
-                            Navigator.of(context)
-                                .pushReplacementNamed('/payment_method');
-                            setState(() {
-                              //
-                            });
-                          });
+                          submit();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2B5BBA),

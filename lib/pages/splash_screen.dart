@@ -13,18 +13,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Timer(const Duration(seconds: 3), () {
-    //   FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    //     if (user != null) {
-    //       Navigator.of(context).pushReplacementNamed('/dashboard');
-    //     } else {
-    //       Navigator.of(context).pushReplacementNamed('/vision');
-    //     }
-    //   });
-    // });
     Timer(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacementNamed('/onboarding');
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user != null) {
+          Navigator.of(context).pushReplacementNamed('/savings_screen');
+        } else {
+          Navigator.of(context).pushReplacementNamed('/onboarding');
+        }
+      });
     });
+    // Timer(const Duration(seconds: 4), () {
+    //   Navigator.of(context).pushReplacementNamed('/onboarding');
+    // });
   }
 
   @override

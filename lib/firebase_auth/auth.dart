@@ -42,7 +42,7 @@ class Auth {
         email: email,
         password: password,
       );
-      Navigator.pushNamed(context, '/create_saving_account');
+      Navigator.pushNamed(context, '/savings_screen');
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';
       if (e.code == 'user-not-found') {
@@ -62,6 +62,6 @@ class Auth {
 
   Future<void> signOut(BuildContext context) async {
     await _firebaseAuth.signOut();
-    Navigator.pushNamed(context, '/login');
+    Navigator.pushNamed(context, '/sign_in');
   }
 }
